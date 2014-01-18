@@ -596,27 +596,27 @@ html, body {
 /* line 9, sass/partials/_globals.scss */
 html {
   font-family: 'Lato', sans-serif;
-  color: #333;
+  color: #333333;
 }
 
 /* line 14, sass/partials/_globals.scss */
 body {
   font-size: 16px;
-  background-color: #f0f0f0;
+  background-color: white;
 }
 
 /* line 19, sass/partials/_globals.scss */
 a {
   transition: color 0.125s;
-  color: #999999;
+  color: #178082;
 }
 /* line 23, sass/partials/_globals.scss */
 a:hover {
-  color: #2ab9bb;
+  color: #999999;
 }
 /* line 27, sass/partials/_globals.scss */
 a:active {
-  color: #97e6e7;
+  color: #178082;
 }
 
 /* ---------- *
@@ -630,7 +630,7 @@ a:active {
 }
 
 /* line 11, sass/partials/_containers.scss */
-#header, .content, #footer {
+#header, #footer {
   padding-left: 3em;
   padding-right: 3em;
 }
@@ -656,25 +656,33 @@ a:active {
 /* ------ *
  * HEADER *
  * ------ */
-/* line 9, sass/partials/_header.scss */
+/* line 5, sass/partials/_header.scss */
+#header {
+  border-bottom: 0.3em #a8eff0 solid;
+}
+/* line 8, sass/partials/_header.scss */
+#header #title {
+  font-size: 1.5em;
+}
+/* line 11, sass/partials/_header.scss */
 #header #title a {
-  color: black;
+  color: #333333;
   text-decoration: none;
 }
-/* line 15, sass/partials/_header.scss */
+/* line 17, sass/partials/_header.scss */
 #header #nav {
   float: right;
 }
-/* line 17, sass/partials/_header.scss */
+/* line 19, sass/partials/_header.scss */
 #header #nav ul {
   list-style: none;
 }
-/* line 20, sass/partials/_header.scss */
+/* line 22, sass/partials/_header.scss */
 #header #nav ul li {
   float: left;
-  padding-left: 2em;
+  padding-left: 3rem;
 }
-/* line 29, sass/partials/_header.scss */
+/* line 31, sass/partials/_header.scss */
 #header #nav ul li a {
   text-decoration: none;
 }
@@ -691,17 +699,28 @@ h1 {
 
 /* line 15, sass/partials/_content.scss */
 h2 {
-  font-weight: 400;
+  font-family: 'Coustard', serif;
+  font-weight: 700;
 }
 
-/* line 19, sass/partials/_content.scss */
+/* line 20, sass/partials/_content.scss */
 h3 {
   font-weight: 400;
 }
 
-/* line 23, sass/partials/_content.scss */
+/* line 24, sass/partials/_content.scss */
 h4 {
   font-weight: 700;
+}
+
+/* line 28, sass/partials/_content.scss */
+#hero {
+  padding: 3em 3em 1.5em 3em;
+  background-color: #f0f0f0;
+}
+/* line 32, sass/partials/_content.scss */
+#hero h1 {
+  margin: 0;
 }
 
 /* ------- *

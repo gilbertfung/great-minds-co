@@ -3,17 +3,19 @@
  * ---------- */
 
 // Colours
-$cyan:			hsl(181,  63,  95);
-$lightGreen: 	hsl(100,  60,  90);
-$yellow:		hsl( 56,  58,  95);
+$cyan:			hsl(181,  70,  80);
+$lightGreen: 	hsl(100,  80,  80);
+$yellow:		hsl( 56,  88,  85);
 
 $darkGray:		rgb(153, 153, 153);
 $medGray:		rgb(197, 197, 197);
 $lightGray:		rgb(240, 240, 240);
 
+$textColor:		#333;
+
 // Measured units
 $pageWidth-max:		80em; // 72em = 1152px; 80em = 1280px;
 
-$space: 	1.5em;
+$space: 	3em;
 
 $tTime:		0.25s;

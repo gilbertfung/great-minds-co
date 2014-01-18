@@ -8,23 +8,23 @@ html, body {
 
 html {
 	font-family: 'Lato', sans-serif;
-	color: #333;
+	color: $textColor;
 }
 
 body {
 	font-size: 16px;
-	background-color: $lightGray;
+	background-color: white;
 }
 
 a {
 	transition: color $tTime/2;
-	color: $darkGray;
+	color: darken($cyan, 50%);
 
 	&:hover {
-		color: darken($cyan, 50%);
+		color: $darkGray;
 	}
 
 	&:active {
-		color: darken($cyan, 20%);
+		color: darken($cyan, 50%);
 	}
 }

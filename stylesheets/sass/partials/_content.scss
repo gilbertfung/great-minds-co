@@ -13,7 +13,8 @@
  }
 
  h2 {
-  	font-weight: 400;
+ 	font-family: 'Coustard', serif;
+  	font-weight: 700;
  }
 
  h3 {
@@ -22,4 +23,13 @@
 
  h4 {
  	font-weight: 700;
+ }
+
+ #hero {
+ 	padding: $space $space $space/2 $space;
+ 	background-color: $lightGray;
+
+ 	h1 {
+ 		margin: 0;
+ 	}
  }

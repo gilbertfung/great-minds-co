@@ -8,7 +8,7 @@
 	padding-top: 1em;
 }
 
-#header, .content, #footer {
+#header, #footer {
 	padding-left: 3em;
 	padding-right: 3em;
 }
@@ -24,7 +24,7 @@
 	// @include flex-flow(row nowrap);
 
 	#hero {
-		
+
 	}
 
 	section {

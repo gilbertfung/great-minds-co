@@ -619,6 +619,11 @@ a:active {
   color: #178082;
 }
 
+/* line 32, sass/partials/_globals.scss */
+.button {
+  padding: 0.25em 0.5em;
+}
+
 /* ---------- *
  * CONTAINERS *
  * ---------- */
@@ -723,6 +728,44 @@ h4 {
   margin: 0;
 }
 
+/* ----------- *
+ * USER INPUTS *
+ * ----------- */
+/* line 5, sass/partials/_forms.scss */
+form {
+  line-height: 2em;
+  /* http://davidtanzer.net/css_vertical_align */
+}
+
+/* http://davidtanzer.net/css_vertical_align */
+/* line 37, sass/partials/_forms.scss */
+#formArea {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  -moz-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: stretch;
+  -ms-flex-pack: stretch;
+  -webkit-justify-content: stretch;
+  -moz-justify-content: stretch;
+  justify-content: stretch;
+  padding: 0 3em;
+}
+/* line 43, sass/partials/_forms.scss */
+#formArea #registerArea, #formArea #loginArea {
+  margin: 0 auto;
+}
+
 /* ------- *
  * $FOOTER *
  * ------- */
+/* line 5, sass/partials/_footer.scss */
+#footer {
+  padding: 1.5em 3em;
+  background-color: #f0f0f0;
+}

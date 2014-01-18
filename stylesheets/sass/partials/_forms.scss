@@ -1,0 +1,65 @@
+/* ----------- *
+ * USER INPUTS *
+ * ----------- */
+
+form {
+	line-height: 2em;
+
+	/* http://davidtanzer.net/css_vertical_align */
+	label {
+		// display: inline-block;
+		// float: left;
+		// width: 40%;
+		// margin-right: 0.5em;
+		// white-space: nowrap;
+		// text-align: right;
+    }
+
+    input, .button {
+    	
+    }
+
+	textarea {
+		;
+	}
+
+	br {
+
+	}
+}
+
+/* http://davidtanzer.net/css_vertical_align */
+.nolabel {
+	// margin-left: 9.5em;
+ //   	padding-left: 0.5em;
+}
+
+#formArea {
+	@include flexbox;
+	@include flex-flow(row nowrap);
+	@include justify-content(stretch);
+	padding: 0 $space;
+
+	#registerArea, #loginArea {
+		margin: 0 auto;
+	}
+
+	#registerArea {
+		
+		
+		#registerPromoter {
+
+		}
+
+		#registerIdeaMaker {
+
+		}
+	}
+
+	#loginArea {
+		
+		#login {
+
+		}
+	}
+}

@@ -12,17 +12,15 @@
 			<h1 id="title"><a href="#">Great Minds, Co.</a></h1>
 			<nav id="nav">
 				<ul>
-					<li>
-						<?php 
-							//$loggedIn = 
-							//if ($loggedIn) {
-								echo '<a href="?action=login">Register / Login</a>';
-							//} else {
-								//echo "<a href="?action=login">Profile</a>";
+					<?php 
+						// if (!$loggedIn) {
+						// If not logged in, show Register / Login
+							echo '<li><a href="?action=login">Register / Login</a></li>';
+						// } else {
+						// If logged in, show Settings
+							//  echo "<li><a href="?action=login">Settings</a></li>";
 							//}
 						?>
-					</li>
-					<li><a href="#">Settings</a></li>
 				</ul>
 			</nav>
 		</header>

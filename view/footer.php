@@ -1,5 +1,5 @@
 	<footer id="footer">
-		Gilbert Fung. Made in 2014.
+		<p>Gilbert Fung. Made in 2014.</p>
 	</footer>
 </div> <!-- .main -->
 

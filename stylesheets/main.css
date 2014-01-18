@@ -630,6 +630,12 @@ a:active {
 }
 
 /* line 11, sass/partials/_containers.scss */
+#header, .content, #footer {
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+/* line 16, sass/partials/_containers.scss */
 #header {
   display: -webkit-box;
   display: -webkit-flex;
@@ -645,8 +651,6 @@ a:active {
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   justify-content: space-between;
-  padding-left: 3em;
-  padding-right: 3em;
 }
 
 /* ------ *

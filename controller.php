@@ -3,14 +3,14 @@
 
 	$action = $_GET['action'];
 	switch ($action) {
-		case 'value':
-			# code...
+		case 'login':
+			require 'view/login.php';
 			break;
 		
 		default:
-			echo "An action was made.";
+			require 'view/main.php';
 			break;
 	}
-	require 'view/main.php';
+
 	require 'view/footer.php';
 ?>

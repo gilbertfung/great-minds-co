@@ -13,6 +13,7 @@
 				break;
 
 			case 'accountCreated':
+				//require 'view/accountCreated.php';
 				require 'view/main.php';
 				break;
 			

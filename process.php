@@ -30,9 +30,7 @@
 
 			// detect if each required variable is set
 			$num_completed_fields = count(array_filter($_POST)); // array_filter w/o callback removes all FALSE elements
-
 			if ($num_completed_fields == count($content)) {
-
 				// prepare content for writing to text file
 				array_pop($content); // pop off 'submit', I don't want that in my text file
 				$formatted_content = implode(' | ', $content)."\n";
@@ -41,22 +39,16 @@
 				$file = 'users.txt';
 				file_put_contents($file, $formatted_content, FILE_APPEND); // open file, APPEND content, close file
 				
+				// redirect to Account Created page
 				$newURL = 'index.php?action=accountCreated';
 				header('Location: '.$newURL);
 			} else {
-				// TODO: should not happen. Form would be validated beforehand.
+				// TODO: validate beforehand, so this doesn't happen
 				echo "I didn't get all required variables.";
 			}
 		} else {
-			// TODO: should not happen. Form would be validated beforehand.
+			// TODO: validate beforehand, so this doesn't happen
 			echo "I didn't get a submission.";
 		}
 	}
-
-	function writeNewAccount() {
-		# code...
-	}
-	// require 'view/header.php';
-	//require 'view/main.php';
-	//require 'view/footer.php';
 ?>

@@ -2,6 +2,10 @@
  * GLOBALS *
  * ------- */
 
+* {
+	box-sizing: border-box;
+}
+
 html, body {
 	overflow-x: hidden;
 }
@@ -29,6 +33,21 @@ a {
 	}
 }
 
+dd {
+	margin-left: 0;
+}
+
 .button {
 	padding: 0.25em 0.5em;
+
+	font-size: 1.25em;
+	font-weight: normal;
+	letter-spacing: 0.05em;
+	color: white;
+
+	background-color: darken($cyan, 50%);
+}
+
+.hidden {
+	display: none;
 }

@@ -589,39 +589,59 @@ table {
  * GLOBALS *
  * ------- */
 /* line 5, sass/partials/_globals.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 9, sass/partials/_globals.scss */
 html, body {
   overflow-x: hidden;
 }
 
-/* line 9, sass/partials/_globals.scss */
+/* line 13, sass/partials/_globals.scss */
 html {
   font-family: 'Lato', sans-serif;
   color: #333333;
 }
 
-/* line 14, sass/partials/_globals.scss */
+/* line 18, sass/partials/_globals.scss */
 body {
   font-size: 16px;
   background-color: white;
 }
 
-/* line 19, sass/partials/_globals.scss */
+/* line 23, sass/partials/_globals.scss */
 a {
   transition: color 0.125s;
   color: #178082;
 }
-/* line 23, sass/partials/_globals.scss */
+/* line 27, sass/partials/_globals.scss */
 a:hover {
   color: #999999;
 }
-/* line 27, sass/partials/_globals.scss */
+/* line 31, sass/partials/_globals.scss */
 a:active {
   color: #178082;
 }
 
-/* line 32, sass/partials/_globals.scss */
+/* line 36, sass/partials/_globals.scss */
+dd {
+  margin-left: 0;
+}
+
+/* line 40, sass/partials/_globals.scss */
 .button {
   padding: 0.25em 0.5em;
+  font-size: 1.25em;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  color: white;
+  background-color: #178082;
+}
+
+/* line 51, sass/partials/_globals.scss */
+.hidden {
+  display: none;
 }
 
 /* ---------- *
@@ -656,6 +676,51 @@ a:active {
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   justify-content: space-between;
+}
+
+/* line 22, sass/partials/_containers.scss */
+.content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+/* line 26, sass/partials/_containers.scss */
+.content #hero {
+  -webkit-box-flex: 100%;
+  -webkit-flex: 100%;
+  -moz-box-flex: 100%;
+  -moz-flex: 100%;
+  -ms-flex: 100%;
+  flex: 100%;
+}
+/* line 30, sass/partials/_containers.scss */
+.content section {
+  -webkit-box-flex: 66%;
+  -webkit-flex: 66%;
+  -moz-box-flex: 66%;
+  -moz-flex: 66%;
+  -ms-flex: 66%;
+  flex: 66%;
+}
+/* line 36, sass/partials/_containers.scss */
+.content aside {
+  -webkit-box-flex: 33%;
+  -webkit-flex: 33%;
+  -moz-box-flex: 33%;
+  -moz-flex: 33%;
+  -ms-flex: 33%;
+  flex: 33%;
+}
+/* line 40, sass/partials/_containers.scss */
+.content form {
+  padding-left: 3em;
+  padding-right: 3em;
 }
 
 /* ------ *
@@ -732,13 +797,6 @@ h4 {
  * USER INPUTS *
  * ----------- */
 /* line 5, sass/partials/_forms.scss */
-form {
-  line-height: 2em;
-  /* http://davidtanzer.net/css_vertical_align */
-}
-
-/* http://davidtanzer.net/css_vertical_align */
-/* line 37, sass/partials/_forms.scss */
 #formArea {
   display: -webkit-box;
   display: -webkit-flex;
@@ -756,9 +814,31 @@ form {
   justify-content: stretch;
   padding: 0 3em;
 }
+
+/* line 14, sass/partials/_forms.scss */
+form fieldset, form label {
+  display: block;
+  margin-bottom: 1.5em;
+}
+/* line 19, sass/partials/_forms.scss */
+form input[type=email], form input[type=password], form input[type=text], form input[type=url], form input[type=submit] {
+  width: 100%;
+  height: 2em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+}
+/* line 32, sass/partials/_forms.scss */
+form #profile-image {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
 /* line 43, sass/partials/_forms.scss */
-#formArea #registerArea, #formArea #loginArea {
-  margin: 0 auto;
+form textarea {
+  display: inline-block;
 }
 
 /* ------- *

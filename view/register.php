@@ -10,11 +10,11 @@
 			<fieldset>
 				<legend>User Type</legend>
 				<select id="userType" name="userType">
-					<option value="0">-Select User Type -</option>
-					<option value="promoter">Promoter</option>
+					<option value="">-Select User Type -</option>
+					<option value="promoter" disabled>Promoter</option>
 					<option value="ideaMaker">Idea-Maker</option>
 				</select>
-				<br>*Project Note: Ideally, Idea-Makers will be "upgraded" from Promoters.
+				<br>*Project Note: Ideally, Idea-Makers will be "upgraded" from Promoters, and this fieldset would not exist.
 			</fieldset>
 
 			<label id="nameLabel">
@@ -84,7 +84,9 @@
 		</form>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$("#ideaMakerOnly").hide();
+				if ($('#userType').value != 'ideaMaker') {
+					$("#ideaMakerOnly").hide();
+				}
 
 				$("#userType").click(function() {
 					if (this.value == 'ideaMaker') {

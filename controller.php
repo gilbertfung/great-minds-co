@@ -11,6 +11,10 @@
 			case 'register':
 				require 'view/register.php';
 				break;
+
+			case 'accountCreated':
+				require 'view/main.php';
+				break;
 			
 			default:
 				require 'view/main.php';

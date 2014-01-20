@@ -1,4 +1,4 @@
-<!-- <section class="content"> -->
+<section class="content">
 	<div id="hero">
 		<h1>
 			<?php
@@ -15,4 +15,4 @@
 		<button><a href="?action=list&type=industries">View all Idea-Makers by Industry</a></button>
 		<button><a href="?action=list&type=ideaMakers">View all Idea-Makers</a></button>
 	</nav>
-<!-- </section> -->
+</section>

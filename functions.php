@@ -1,4 +1,5 @@
 <?php 
+	// reusable code to quickly load formatted content from databse
 	function loadEntities()	{
 		// insert PHP code that loads file content into the variable $content
 		$file = 'users.txt';
@@ -20,10 +21,12 @@
 		return $result;
 	}
 
+	// used for usort function
 	function compare($a, $b) { 
 		return ($a[1] < $b[1]) ? -1 : 1; 
 	}
 
+	// extract unique entities from the entire database
 	function getUniqueGroup($entities, $index) {
 		$uniqueResult = [];
 		foreach ($entities as $entity) {

@@ -1,3 +1,4 @@
+<section class="content">
 <?php
 	require_once 'functions.php';
 
@@ -76,6 +77,7 @@
 ?>
 		<ul id="showGroup">
 			<?php 
+				// get all unique industries, then post them as links.
 				$industriesUnique = getUniqueGroup($entities, 9);
 				foreach ($industriesUnique as $industry) {
 					echo "<li class=\"$industry\">";
@@ -87,3 +89,4 @@
 <?php
 	}
 ?>
+</section>

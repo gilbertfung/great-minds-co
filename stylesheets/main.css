@@ -710,6 +710,10 @@ button a {
   flex: 100%;
 }
 /* line 30, sass/partials/_containers.scss */
+.content nav {
+  padding: 3em;
+}
+/* line 34, sass/partials/_containers.scss */
 .content section {
   -webkit-box-flex: 66%;
   -webkit-flex: 66%;
@@ -718,7 +722,7 @@ button a {
   -ms-flex: 66%;
   flex: 66%;
 }
-/* line 36, sass/partials/_containers.scss */
+/* line 40, sass/partials/_containers.scss */
 .content aside {
   -webkit-box-flex: 33%;
   -webkit-flex: 33%;
@@ -727,7 +731,7 @@ button a {
   -ms-flex: 33%;
   flex: 33%;
 }
-/* line 40, sass/partials/_containers.scss */
+/* line 44, sass/partials/_containers.scss */
 .content form {
   padding-left: 3em;
   padding-right: 3em;
@@ -793,14 +797,50 @@ h4 {
   font-weight: 700;
 }
 
-/* line 28, sass/partials/_content.scss */
+/* line 32, sass/partials/_content.scss */
 #hero {
   padding: 3em 3em 1.5em 3em;
   background-color: #f0f0f0;
 }
-/* line 32, sass/partials/_content.scss */
+/* line 36, sass/partials/_content.scss */
 #hero h1 {
   margin: 0;
+}
+
+/* line 41, sass/partials/_content.scss */
+table, thead, tbody, tr, th, td {
+  text-align: left;
+}
+
+/* line 44, sass/partials/_content.scss */
+table {
+  width: 100%;
+  margin: 3em;
+}
+/* line 52, sass/partials/_content.scss */
+table tr th, table tr td {
+  padding-right: 3em;
+}
+
+/* line 58, sass/partials/_content.scss */
+#showGroup {
+  width: 100%;
+  margin: 3em;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 64, sass/partials/_content.scss */
+#showGroup li {
+  float: left;
+  margin-right: 3em;
+  padding: 1.5em;
+  border: 2px #178082 solid;
+}
+/* line 70, sass/partials/_content.scss */
+#showGroup li a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 /* ----------- *
@@ -844,6 +884,12 @@ form textarea {
   display: inline-block;
 }
 
+/* ------------- *
+ * LIST DISPLAYS *
+ * ------------- */
+/* ------------ *
+ * PROFILE PAGE *
+ * ------------ */
 /* ------- *
  * $FOOTER *
  * ------- */
@@ -851,4 +897,51 @@ form textarea {
 #footer {
   padding: 1.5em 3em;
   background-color: #f0f0f0;
+}
+
+/* line 1, sass/partials/_shame.scss */
+#profile-image {
+  -webkit-box-flex: 33%;
+  -webkit-flex: 33%;
+  -moz-box-flex: 33%;
+  -moz-flex: 33%;
+  -ms-flex: 33%;
+  flex: 33%;
+  padding-top: 3em;
+  padding-left: 3em;
+}
+
+/* line 7, sass/partials/_shame.scss */
+#profile-info {
+  -webkit-box-flex: 66%;
+  -webkit-flex: 66%;
+  -moz-box-flex: 66%;
+  -moz-flex: 66%;
+  -ms-flex: 66%;
+  flex: 66%;
+  padding-top: 3em;
+  padding-left: 3em;
+}
+
+/* line 13, sass/partials/_shame.scss */
+#profile-projects {
+  -webkit-box-flex: 66%;
+  -webkit-flex: 66%;
+  -moz-box-flex: 66%;
+  -moz-flex: 66%;
+  -ms-flex: 66%;
+  flex: 66%;
+  padding-top: 3em;
+  padding-left: 3em;
+}
+
+/* line 19, sass/partials/_shame.scss */
+#profile-ideas {
+  -webkit-box-flex: 33%;
+  -webkit-flex: 33%;
+  -moz-box-flex: 33%;
+  -moz-flex: 33%;
+  -ms-flex: 33%;
+  flex: 33%;
+  padding: 3em;
 }

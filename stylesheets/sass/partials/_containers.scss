@@ -27,6 +27,10 @@
 		@include flex(100%);
 	}
 
+	nav {
+		padding: $space;
+	}
+	
 	section {
 		@include flex(66%);
 	// 	margin-top: $space*3;

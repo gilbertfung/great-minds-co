@@ -1,0 +1,22 @@
+#profile-image {
+	@include flex(33%);
+	padding-top: $space;
+	padding-left: $space;
+}
+
+#profile-info {
+	@include flex(66%);
+	padding-top: $space;
+	padding-left: $space;
+}
+
+#profile-projects {
+	@include flex(66%);
+	padding-top: $space;
+	padding-left: $space;
+}
+
+#profile-ideas {
+	@include flex(33%);
+	padding: $space;
+}

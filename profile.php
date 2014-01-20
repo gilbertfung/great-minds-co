@@ -28,7 +28,7 @@
 					<p>Right now I've been in the $industry industry for $years years.<br>
 					I live in the $location area, and this is what I have to say:</p>
 					<blockquote>$bio</blockquote>
-					<p>Want to know more about me? Here's my website: $website<br>
+					<p>Want to know more about me? Here's my website: <a href=\"$website\">$website</a><br>
 					...But if you want to reach me, do it $contactBy. Thanks!</p>";
 			}
 		}
@@ -51,9 +51,10 @@
 		?>
 	</div>
 	<div id="profile-projects">
-
+		<h3>My Projects</h3>
 	</div>
 	<div id="profile-ideas">
+		<h3>My Ideas</h3>
 	</div>
 </section>
 <?php

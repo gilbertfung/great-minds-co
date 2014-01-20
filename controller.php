@@ -23,7 +23,6 @@
 			
 			// List by * page
 			case 'list':
-
 				require 'view/main.php';
 				require 'view/list.php';
 				break;

@@ -28,7 +28,7 @@
 		if (isset($_POST['submit'])) {
 			// add every field into $content
 			$content = [];
-			foreach($_POST as $key=>$value) { // do all, regardless if it has FALSE elements or not, for the sake of table consistency (applies to promoters)
+			foreach($_POST as $key => $value) { // do all, regardless if it has FALSE elements or not, for the sake of table consistency (applies to promoters)
 				$content[$key] = $value;
 			}
 
@@ -44,8 +44,7 @@
 				file_put_contents($file, $contentString, FILE_APPEND); // open file, APPEND content, close file
 				
 				// redirect to Account Created page
-				$newURL = 'index.php?action=accountCreated';
-				header('Location: '.$newURL);
+				header('Location: index.php?action=accountCreated');
 			} else {
 				// TODO: validate beforehand, so this doesn't happen
 				echo "I didn't get all required variables.";

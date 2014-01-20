@@ -29,7 +29,7 @@
 
 			// View profile page
 			case 'viewProfile':
-				require 'view/profile.php';
+				header('Location: profile.php');
 				break;
 
 			// If no action or is index, go to main.

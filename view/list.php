@@ -1,4 +1,6 @@
 <?php
+	require_once 'functions.php';
+
 	if (isset($_GET['type'])) {
 		$type = $_GET['type'];
 		switch ($type) {
@@ -16,20 +18,37 @@
 		}
 	}
 
-	function showList($from = 'all') {
+	function showList($groupBy = 'all') { 
 		$entities = loadEntities();
+
+		// if set, show entries from specified industry
 		if (isset($_GET['groupBy'])) {
 			$groupBy = $_GET['groupBy'];
-			switch ($groupBy) {
-				case 'industries': // show unique industry entries
-					
-					break;
+			
+			foreach ($entities as $key => $entity) {
+				$industry = $entity[9];
+				// if industry is not the one that was requested, remove it from entities.
+				if ($industry != $groupBy) {
+					array_splice($entity, $key, 1);
+				}
+			}
+			//$industriesUnique = getUniqueGroup($entities, 10); // all unique industries are in here. use this to determine
+					// remove entities that do not match specified industry
+				// foreach ($entities as $entity) {
+				// 	isolate industry - array_search(needle, haystack)
+				// 	add to industrieslist
+				// }
+
+				// foreach ($variable as $key => $value) {
+				// 	keep groupby remove rest
+				// }
+				// 	break;
 				
-				default: // all. default sort by member name
-					break;
-			} // end switch
+				// default: // all. default sort by member name
+				// 	break;
+			// } // end switch
 		} else { // do your default: show all by member name
-			usort($entities, 'compareNames');
+			usort($entities, 'compare');
 		}
 ?>
 		<table id="showList">
@@ -43,12 +62,12 @@
 			</thead>
 			<tbody>
 <?php 
-				foreach ($entities as $entity) {
-					$id = $entity[0];
-					$name = $entity[2];
-					$industry = $entity[10];
-					$location = $entity[6];
-					$website = $entity[7];
+				foreach ($entities as $key => $entity) {
+					$id = $key; // $id = $entity[0];
+					$name = $entity[1];
+					$industry = $entity[9];
+					$location = $entity[5];
+					$website = $entity[6];
 
 					echo "<tr class=\"entity\">";
 						echo "<td><a href=\"profile.php?id=$id\">$name</a></td>";
@@ -68,14 +87,7 @@
 ?>
 		<ul id="showGroup">
 			<?php 
-				$industriesUnique = [];
-				foreach ($entities as $entity) {
-					$industry = $entity[10];
-					array_push($industriesUnique, $industry);
-				}
-				
-				$industriesUnique = array_unique($industriesUnique); // remove all duplicate industries for placing in list
-				sort($industriesUnique); // sort the industries by name
+				$industriesUnique = getUniqueGroup($entities, 9);
 				foreach ($industriesUnique as $industry) {
 					echo "<li class=\"$industry\">";
 						echo "<a href=\"index.php?action=list&type=ideaMakers&groupBy=$industry\">$industry</a>";
@@ -84,34 +96,5 @@
 			?>
 		</ul>
 <?php
-	}
-
-	function loadEntities()	{
-		// insert PHP code that loads file content into the variable $content
-		$file = 'users.txt';
-		$contentString = file_get_contents($file);
-		// format the content so that it can be placed in a table
-		$content = explode("\n", $contentString); // explode into elements of entities
-
-		$result = [];
-		$id = 0;
-		foreach ($content as $entityString) {
-			// extract data from each entity, and put it into an array within $content
-			$entity = explode(" | ", $entityString);
-
-			// insert an id to the array. text file solution, since every line is a separate entity
-			array_unshift($entity, $id);
-			$id += 1;
-			array_push($result, $entity);
-		}
-		return $result;
-	}
-
-	function compareNames($a, $b) { 
-		return ($a[2] < $b[2]) ? -1 : 1; 
-	}
-
-	function compareIndustries($a, $b) { 
-		return ($a[10] < $b[10]) ? -1 : 1; 
 	}
 ?>

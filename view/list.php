@@ -24,29 +24,6 @@
 		// if set, show entries from specified industry
 		if (isset($_GET['groupBy'])) {
 			$groupBy = $_GET['groupBy'];
-			
-			foreach ($entities as $key => $entity) {
-				$industry = $entity[9];
-				// if industry is not the one that was requested, remove it from entities.
-				if ($industry != $groupBy) {
-					array_splice($entity, $key, 1);
-				}
-			}
-			//$industriesUnique = getUniqueGroup($entities, 10); // all unique industries are in here. use this to determine
-					// remove entities that do not match specified industry
-				// foreach ($entities as $entity) {
-				// 	isolate industry - array_search(needle, haystack)
-				// 	add to industrieslist
-				// }
-
-				// foreach ($variable as $key => $value) {
-				// 	keep groupby remove rest
-				// }
-				// 	break;
-				
-				// default: // all. default sort by member name
-				// 	break;
-			// } // end switch
 		} else { // do your default: show all by member name
 			usort($entities, 'compare');
 		}
@@ -69,12 +46,24 @@
 					$location = $entity[5];
 					$website = $entity[6];
 
-					echo "<tr class=\"entity\">";
-						echo "<td><a href=\"profile.php?id=$id\">$name</a></td>";
-						echo "<td>$industry</td>";
-						echo "<td>$location</td>";
-						echo "<td>$website</td>";
-					echo "</tr>";
+					if (isset($_GET['groupBy'])) {
+						$groupBy = $_GET['groupBy'];
+						if ($industry == $groupBy) {
+							echo "<tr class=\"entity\">";
+								echo "<td><a href=\"profile.php?id=$id\">$name</a></td>";
+								echo "<td>$industry</td>";
+								echo "<td>$location</td>";
+								echo "<td>$website</td>";
+							echo "</tr>";
+						} // else don't show any that aren't from that industry
+					} else { // if groupBy doesn't exist, just do as normally do
+						echo "<tr class=\"entity\">";
+							echo "<td><a href=\"profile.php?id=$id\">$name</a></td>";
+							echo "<td>$industry</td>";
+							echo "<td>$location</td>";
+							echo "<td>$website</td>";
+						echo "</tr>";
+					}
 				}
 ?>
 			</tbody>

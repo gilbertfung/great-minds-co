@@ -17,7 +17,7 @@
 					<?php 
 						// if (!$loggedIn) {
 						// If not logged in, show Register / Login
-							echo '<li><a href="?action=login">Register / Login</a></li>';
+							echo '<li><a href="index.php?action=login">Register / Login</a></li>';
 						// } else {
 						// If logged in, show Settings
 							//  echo "<li><a href="?action=login">Settings</a></li>";

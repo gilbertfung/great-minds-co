@@ -17,8 +17,8 @@
 	}
 
 	function showList($type = 'ideaMakers', $sort = 'alpha') {
-		$file = 'users.txt';
 		// insert PHP code that loads file content into the variable $content
+		$file = 'users.txt';
 		$contentString = file_get_contents($file);
 		// format the content so that it can be placed in a table
 		$content = explode("\n", $contentString); // explode into elements of entities
@@ -34,7 +34,17 @@
 			$id += 1;
 			array_push($entities, $entity);
 		}
+		usort($entities, 'compare');
 
+		switch ($type) {
+			case 'industries':
+				# code...
+				break;
+			
+			default: // show all ideaMakers by default
+				
+				break;
+		}
 		?>
 
 		<table>
@@ -69,6 +79,10 @@
 		</table>
 		
 		<?php
+	}
+
+	function compare($a, $b) { 
+		return ($a[2] < $b[2]) ? -1 : 1; 
 	}
 
 	// Print variable $content

@@ -1,20 +1,18 @@
-<section class="content">
+<!-- <section class="content"> -->
 	<div id="hero">
 		<h1>
 			<?php
-				// if redirected from accountCreated, show a welcome message
-				if (isset($_GET['action']) && $_GET['action'] == 'accountCreated') {
-					$heroText = "Hey, name. Welcome to Great Minds, Co.";
+				if (isset($heroText)) {
+					echo $heroText;
 				} else {
-					$heroText = "Let's share.";
+					// All pages without $heroText already set, will have this phrase.
+					echo "Let's share.";
 				}
-				echo $heroText;
 			?>
 		</h1>
 	</div>
-	<div>
-		<a href="?viewBy=Industry">View all Idea-Makers by Industry</a>
-		<a href="?viewBy=Name">View all Idea-Makers</a>
-	</div>
-	This is content.
-</section>
+	<nav id="menu">
+		<button><a href="?action=list&type=industries">View all Idea-Makers by Industry</a></button>
+		<button><a href="?action=list&type=ideaMakers">View all Idea-Makers</a></button>
+	</nav>
+<!-- </section> -->

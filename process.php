@@ -10,6 +10,10 @@
 				createAccount();
 				break;
 
+			case 'viewProfile':
+				// go to profile page
+				break;
+
 			default:
 				echo "You processed nothing.";
 				break;
@@ -29,15 +33,15 @@
 			}
 
 			// detect if each required variable is set
-			$num_completed_fields = count(array_filter($_POST)); // array_filter w/o callback removes all FALSE elements
-			if ($num_completed_fields == count($content)) {
+			$numCompletedFields = count(array_filter($_POST)); // array_filter w/o callback removes all FALSE elements
+			if ($numCompletedFields == count($content)) {
 				// prepare content for writing to text file
 				array_pop($content); // pop off 'submit', I don't want that in my text file
-				$formatted_content = implode(' | ', $content)."\n";
+				$contentString = implode(' | ', $content)."\n";
 				
 				// write user information into text file
 				$file = 'users.txt';
-				file_put_contents($file, $formatted_content, FILE_APPEND); // open file, APPEND content, close file
+				file_put_contents($file, $contentString, FILE_APPEND); // open file, APPEND content, close file
 				
 				// redirect to Account Created page
 				$newURL = 'index.php?action=accountCreated';

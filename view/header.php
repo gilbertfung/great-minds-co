@@ -22,7 +22,7 @@
 						// If logged in, show Settings
 							//  echo "<li><a href="?action=login">Settings</a></li>";
 							//}
-						?>
+					?>
 				</ul>
 			</nav>
 		</header>

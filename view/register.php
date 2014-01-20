@@ -45,17 +45,18 @@
 
 			<label id="websiteLabel">
 				<strong>Website</strong>
-				<input type="url" name="website" value="">
+				<input type="url" name="website" value="http://">
 			</label>
 
 			<fieldset id="bioFieldset">
 				<legend><strong>Bio</strong></legend>
 				<label>
-					<input class="hidden" type="file" name="profileImage" value="">
 					<div>
-						<img id="profile-image" src="http://placekitten.com/100/100" alt="Edit your picture">
-						<textarea name="bio" form="register" rows="5"></textarea>
+						<p><textarea name="bio" form="register" rows="5"></textarea></p>
 					</div>
+					<strong>Choose your profile picture</strong><br>
+					<input class="" id="profile-image-input" type="file" name="profileImage" value="">
+					<!-- <span id="profile-image"></span> -->
 				</label>
 			</fieldset>
 
@@ -66,7 +67,7 @@
 
 			<label id="yearsLabel">
 				<strong>Years of expertise</strong>
-				<input type="text" name="years" value="">
+				<input type="number" name="years" value="">
 			</label>
 
 			<fieldset id="contactByFieldset">

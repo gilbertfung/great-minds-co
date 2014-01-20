@@ -46,6 +46,16 @@ dd {
 	color: white;
 
 	background-color: darken($cyan, 50%);
+
+}
+
+button {
+	border: 0;
+	
+	a {
+		font-size: 1rem;
+		text-decoration: none;
+	}
 }
 
 .hidden {

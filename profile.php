@@ -1,5 +1,39 @@
 <?php
-	require 'view/header.php';
+require 'view/header.php';
+?>
+<div id="cover">
+<h2>Person's Name</h2>
+	<article id="cover-info">
+		<div class="flex">
+			<div class="side"><img src="//" width="320" height="240"></div>
+			<div class="section">This is a bio.
+			<div class="follow-button">
+				<button name="follow" class="follow">Follow</button>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.follow-button').on('click', 'button', function() {
+					$.ajax({
+						type: "POST",
+						url: "process.php?follow=12345",
+						success: function() {
+							$('.follow-button button').css('background-color', '#a8eff0').text("Followed!");
+						}
+					});
+				});
+			});
+		</script>
+			</div>
+		</div>
+	</article>
+</div>
+</section>
+<?php
+require 'view/footer.php';
+?>
+
+<?php
 	require_once 'functions.php';
 
 	if (isset($_GET['id'])) {

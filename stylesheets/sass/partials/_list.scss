@@ -1,3 +1,40 @@
 /* ------------- *
  * LIST DISPLAYS *
  * ------------- */
+
+.flex { // up to 3 tiles per row
+	@include flexbox;
+	@include flex-flow(row wrap);
+	@include justify-content(space-between);
+}
+.section {
+	@include flex(66%);
+}
+.side {
+	@include flex(33%);
+}
+
+.bar, .tile {
+	@include flex(1);
+	padding: 2rem $rspace;
+
+	h3 {
+		margin: 0;
+	}
+
+	p {
+		margin-top: 0.5em;
+	}
+}
+
+.bar { // full width, one entry per row
+	background-color: $lightGreen;
+}
+
+.tile {
+	background-color: $yellow;
+}
+
+.list { // compact rows
+
+}

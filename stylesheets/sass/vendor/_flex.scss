@@ -57,6 +57,8 @@
 // display: flex | inline-flex
 //
 // http://w3.org/tr/css3-flexbox/#flex-containers
+//
+// (Placeholder selectors for each type, for those who rather @extend)
 
 @mixin flexbox {
 	display: -webkit-box;
@@ -65,6 +67,8 @@
 	display: -ms-flexbox;
 	display: flex;
 }
+
+%flexbox { @include flexbox; }
 
 //----------------------------------
 
@@ -75,6 +79,8 @@
 	display: -ms-inline-flexbox;
 	display: inline-flex;
 }
+
+%inline-flex { @include inline-flex; }
 
 //----------------------------------------------------------------------
 
@@ -222,7 +228,7 @@
 // Values: Like "width" 
 // Default: auto
 //
-// http://w3.org/tr/css3-flexbox/#flex-shrink-property
+// http://www.w3.org/TR/css3-flexbox/#flex-basis-property
 
 @mixin flex-basis($value: auto) {
 	-webkit-flex-basis: $value;

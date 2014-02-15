@@ -8,7 +8,7 @@
 	padding-top: 1em;
 }
 
-#header, #footer {
+#header, /*#cover, .content,*/ #footer {
 	padding-left: 3em;
 	padding-right: 3em;
 }
@@ -19,13 +19,70 @@
 	@include justify-content(space-between);
 }
 
+#topic {
+	@include flexbox;
+	@include flex-flow(row wrap);
+	@include align-items(flex-start);
+
+	#sidenav, #cover, #content {
+		@include flex(1 100%);
+	}
+
+	#sidenav, #cover {
+		// @include flex(1);
+	}
+
+	#sidenav {
+		@include flex(15%);
+		height: 100%;
+		ul {
+			margin: 0;
+			padding: 0;
+			li {
+				padding: 0.5em 0 0.5em $space;
+				background-color: white;
+				// border-right: 1px solid $medGray;
+				border-bottom: 1px solid $medGray;
+				&:first-child {
+					padding: 3em 0 0.5em $space;
+					background-color: $medGray;
+					border-bottom: 0;
+				}
+				a {
+					font-size: 1.25em;
+					text-decoration: none;
+					img {
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+	}
+
+	#cover {
+		@include flex(85%);
+
+		h2 {
+			margin: 0;
+			padding: 2rem $rspace 0 $rspace;
+			font-size: 2em;
+			background-color: $lightGray;
+			span {
+				font-family: 'Lato', sans-serif;
+				font-size: 1.2rem;
+				float: right;
+			}
+		}
+
+		#cover-info {
+			padding: 2rem $space;
+		}
+	}
+}
+
 .content {
 	@include flexbox;
 	@include flex-flow(row wrap);
-
-	#hero {
-		@include flex(100%);
-	}
 
 	nav {
 		padding: $space;

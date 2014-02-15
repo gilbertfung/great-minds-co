@@ -6,36 +6,29 @@ h1, h2, h3, h4 {
 
 }
 
-h1 {
+h1 { // Company Name
 	font-family: 'Coustard', serif;
 	font-weight: 700;
-	letter-spacing: 0.03em;
+	letter-spacing: 0.02em;
 }
 
-h2 {
+h2 { // Hero Title
 	font-family: 'Coustard', serif;
 	font-weight: 700;
 }
 
-h3 {
+h3 { // Main Heading
+	// margin: 0;
+	font-size: 1.5em;
 	font-weight: 400;
 }
 
-h4 {
+h4 { // Sub Heading
 	font-weight: 700;
 }
 
 blockquote {
 
-}
-
-#hero {
-	padding: $space $space $space/2 $space;
-	background-color: $lightGray;
-
-	h1 {
-		margin: 0;
-	}
 }
 
 table, thead, tbody, tr, th, td {

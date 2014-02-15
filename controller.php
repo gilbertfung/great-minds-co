@@ -1,46 +1,41 @@
 <?php
+if (isset($_GET['action'])) {
+	$action = $_GET['action'];
+	switch ($action) {
+		case 'login': // Login page
+			require 'view/login.php';
+			break;
+
+		
+		case 'register': // Register page
+			require 'view/register.php';
+			break;
+
+		
+		case 'accountCreated': // Account created page
+			// if redirected from accountCreated, show a welcome message
+			$heroText = "Hey, welcome to Great Minds, Co.";
+			require 'view/main.php';
+			break;
+		
+		
+		case 'list': // List by * page
+			require 'view/main.php';
+			require 'view/list.php';
+			break;
+
+		
+		case 'viewProfile': // View profile page
+			header('Location: profile.php');
+			break;
+
+		default: // If no action or is index, go to main.
+			require 'view/main.php';
+	} 
+} else {
+	// Show index if there is no action.
 	require 'view/header.php';
-
-	if (isset($_GET['action'])) {
-		$action = $_GET['action'];
-		switch ($action) {
-			// Login page
-			case 'login':
-				require 'view/login.php';
-				break;
-
-			// Register page
-			case 'register':
-				require 'view/register.php';
-				break;
-
-			// Account created page
-			case 'accountCreated':
-				// if redirected from accountCreated, show a welcome message
-				$heroText = "Hey, welcome to Great Minds, Co.";
-				require 'view/main.php';
-				break;
-			
-			// List by * page
-			case 'list':
-				require 'view/main.php';
-				require 'view/list.php';
-				break;
-
-			// View profile page
-			case 'viewProfile':
-				header('Location: profile.php');
-				break;
-
-			// If no action or is index, go to main.
-			default:
-				require 'view/main.php';
-				break;
-		} 
-	} else {
-		// Show index if there is no action.
-		require 'view/main.php';
-	}
-
+	require 'view/main.php';
 	require 'view/footer.php';
+}
 ?>

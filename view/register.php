@@ -1,6 +1,6 @@
 <section class="content">
 	<div id="hero">
-		<h1>Wow, much register!</h1>
+		<h2>Wow, much register!</h2>
 	</div>
 
 	<section class="formArea">

@@ -9,8 +9,8 @@
 }
 
 #header, /*#cover, .content,*/ #footer {
-	padding-left: 3em;
-	padding-right: 3em;
+	padding-left: 0rem;
+	padding-right: 3rem;
 }
 
 #header {
@@ -24,7 +24,7 @@
 	@include flex-flow(row wrap);
 	@include align-items(flex-start);
 
-	#sidenav, #cover, #content {
+	#sidenav, #cover, .content {
 		@include flex(1 100%);
 	}
 
@@ -67,11 +67,13 @@
 			padding: 2rem $rspace 0 $rspace;
 			font-size: 2em;
 			background-color: $lightGray;
-			span {
-				font-family: 'Lato', sans-serif;
-				font-size: 1.2rem;
-				float: right;
-			}
+		}
+
+		.action {
+			padding-right: $rspace;
+			font-family: 'Lato', sans-serif;
+			font-size: 1.2rem;
+			float: right;
 		}
 
 		#cover-info {
@@ -80,29 +82,29 @@
 	}
 }
 
-.content {
-	@include flexbox;
-	@include flex-flow(row wrap);
+// .content {
+// 	@include flexbox;
+// 	@include flex-flow(row wrap);
 
-	nav {
-		padding: $space;
-	}
+// 	nav {
+// 		padding: $space;
+// 	}
 	
-	section {
-		@include flex(66%);
-	// 	margin-top: $space*3;
-	// 	margin-right: $space;
-	}
+// 	section {
+// 		@include flex(66%);
+// 	// 	margin-top: $space*3;
+// 	// 	margin-right: $space;
+// 	}
  
-	aside { 
-		@include flex(33%);
-	}
+// 	aside { 
+// 		@include flex(33%);
+// 	}
 
-	form {
-		padding-left: 3em;
-		padding-right: 3em;
-	}
-}
+// 	form {
+// 		padding-left: 3em;
+// 		padding-right: 3em;
+// 	}
+// }
 
 #footer {
 // 	text-align: center;

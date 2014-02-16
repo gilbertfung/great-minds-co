@@ -1,6 +1,8 @@
-<?php
-require 'view/header.php';
-
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/dbconnect.php'; ?>
+<?php require_once 'includes/functions.php'; ?>
+<?php require_once 'includes/layouts/header.php'; ?>
+<?php requireSSL(false);
 // for industry filter
 $query = "SELECT * "
 		."FROM tag "
@@ -10,7 +12,7 @@ if (!$industries) { die("Database query failed."); }
 ?>
 
 <div id="cover">
-	<h2>Ideas<span><a href="?show=list">Bar</a> <a href="?show=list">Tile</a> <a href="?show=list">List</a> <a href="" id="togglefilter">Filter</a></span></h2>
+	<h2>Ideas<span class="action"><a href="?show=list">Bar</a> <a href="?show=list">Tile</a> <a href="?show=list">List</a> <a href="" id="togglefilter">Filter</a></span></h2>
 	<form id="filter" action="filter.php?in=ideas" method="get">
 		<h3>Filter</h3>
 		<!-- <label>Industry:</label> -->
@@ -37,7 +39,7 @@ if (!$industries) { die("Database query failed."); }
 		});
 	</script>
 	
-	<section id="content" class="flex">
+	<section class="content" class="flex">
 		<?php 
 			$query = "SELECT * "
 					."FROM idea ";
@@ -54,7 +56,7 @@ if (!$industries) { die("Database query failed."); }
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('#content').on('click', 'button', function() {
+				$('.content').on('click', 'button', function() {
 					$.ajax({
 						type: "POST",
 						url: "process.php?promote=12345",
@@ -68,6 +70,4 @@ if (!$industries) { die("Database query failed."); }
 	</section>
 </div>
 </section> <!--#topic-->
-<?php
-require 'view/footer.php';
-?>
+<?php require 'includes/layouts/footer.php'; ?>

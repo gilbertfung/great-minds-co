@@ -1,6 +1,8 @@
-<?php
-require 'view/header.php';
-?>
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/dbconnect.php'; ?>
+<?php require_once 'includes/functions.php'; ?>
+<?php require_once 'includes/layouts/header.php'; ?>
+<?php requireSSL(false); ?>
 <div id="cover">
 <h2>Project Name</h2>
 	<article id="cover-info">
@@ -29,6 +31,4 @@ require 'view/header.php';
 	</article>
 </div>
 </section>
-<?php
-require 'view/footer.php';
-?>
+<?php require 'includes/layouts/footer.php'; ?>

@@ -3,7 +3,8 @@
  * ------------ */
 
 h1, h2, h3, h4 {
-
+	padding-left: $rspace;
+	padding-right: $rspace;
 }
 
 h1 { // Company Name
@@ -27,8 +28,17 @@ h4 { // Sub Heading
 	font-weight: 700;
 }
 
-blockquote {
+#post-message {
+	margin: 0;
+	text-align: center;
+	background-color: $lightGray;
+}
 
+.follow {
+	//background-color: ;
+}
+.unfollow {
+	background-color: $cyan;
 }
 
 table, thead, tbody, tr, th, td {

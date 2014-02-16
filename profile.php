@@ -1,40 +1,99 @@
-<?php
-require 'view/header.php';
+<?php require_once 'includes/session.php'; ?>
+<?php require_once 'includes/dbconnect.php'; ?>
+<?php require_once 'includes/functions.php'; ?>
+<?php require_once 'includes/layouts/header.php'; ?>
+<?php requireSSL(false); 
+	if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
+		$_SESSION['message'] = "Sign in to view your information.";
+		redirect_to("login.php");
+	}
+
+	$user;
+	if (isset($_GET['id'])) {
+		if ($_GET['id'] == "you") {
+			// looking at own profile
+			$user_id = $_SESSION['user_id'];
+		} else {
+			// looking at someone's profile
+			$user_id = $_GET['id'];
+		}
+		$user = find_user_by_id($user_id);
+	} else {
+		// looking at nobody's profile
+		$_SESSION['message'] = "Who are you looking at?";
+		redirect_to("index.php");
+	}
 ?>
 <div id="cover">
-<h2>Person's Name</h2>
-	<article id="cover-info">
-		<div class="flex">
-			<div class="side"><img src="//" width="320" height="240"></div>
-			<div class="section">This is a bio.
-			<div class="follow-button">
-				<button name="follow" class="follow">Follow</button>
-			</div>
+<h2><?php echo $user['name']; ?></h2>
+<article id="cover-info">
+	<div class="flex">
+		<div class="side"><img src="//" width="320" height="240"></div>
+		<div class="section">
+			<p><?php 
+				if (empty($user['bio'])) {
+					echo "This person didn't write a bio.";
+				} else {
+					echo $user['bio']; 
+				}?>
+			</p>
+			<?php echo '<div id="follow-'.$user["user_id"].'" class="follow-button">';
+				$query = "SELECT following_user_id "
+						."FROM user_follows "
+						."WHERE user_id = ".$user["user_id"]; 
+				$result = mysqli_query($db, $query);
+				if ($row = mysqli_fetch_assoc($result)) {
+					// hide follow
+					echo '<button class="follow" name="follow" class="follow" style="display:none">Follow</button>';
+					echo '<button class="unfollow" name="unfollow" class="follow">Following</button>';
+				} else {
+					// hide unfollow
+					echo '<button class="follow" name="follow" class="follow">Follow</button>';
+					echo '<button class="unfollow" name="unfollow" class="follow" style="display:none">Following</button>';
+				}
+			echo '</div>'; ?>
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('.follow-button').on('click', 'button', function() {
+				var item = '#follow-'+<?php echo $user['user_id']; ?>;
+				$(item).children('.follow').click(function() {
+					var dataString = "process.php?follow="+<?php echo $user['user_id']; ?>;
 					$.ajax({
 						type: "POST",
-						url: "process.php?follow=12345",
-						success: function() {
-							$('.follow-button button').css('background-color', '#a8eff0').text("Followed!");
+						url: dataString,
+						success: function(html) {
+							// var $html = $(html);
+							// $html.filter('#err').appendTo('#error');
+							$('.follow').hide();
+							$('.unfollow').show();
+						}
+					});
+				});
+				$(item).children('.unfollow').click(function() {
+					var dataString = "process.php?unfollow="+<?php echo $user['user_id']; ?>;
+					$.ajax({
+						type: "POST",
+						url: dataString,
+						success: function(html) {
+							// var $html = $(html);
+							// $html.filter('#err').appendTo('#error');
+							$('.unfollow').hide();
+							$('.follow').show();
 						}
 					});
 				});
 			});
 		</script>
-			</div>
 		</div>
-	</article>
+	</div>
+</article>
 </div>
 </section>
-<?php
-require 'view/footer.php';
-?>
+<?php require 'includes/layouts/footer.php'; ?>
+<!-- <div id='error'></div> -->
 
 <?php
-	require_once 'functions.php';
+	/*require_once 'functions.php';
 
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
@@ -68,9 +127,9 @@ require 'view/footer.php';
 		}
 	} else {
 		echo "No user ID specified. Who are you looking for?";
-	}
+	}*/
 ?>
-<section class="content">
+<!--<section class="content">
 	<div id="hero">
 		<?php 
 			echo "<h1>Hey, I'm $name.</h1>";
@@ -90,7 +149,4 @@ require 'view/footer.php';
 	<div id="profile-ideas">
 		<h3>My Ideas</h3>
 	</div>
-</section>
-<?php
-	require 'view/footer.php';
-?>
+</section>-->

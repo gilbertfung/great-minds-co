@@ -86,7 +86,7 @@ if (isset($_POST['submit'])) {
 			<br>
 			<input type="text" name="tags" placeholder="Any tags you want to put here?" disabled>
 			<br>
-			<input type="checkbox" name="project" value="project">This is a project. <!--TODO advanced project creation via connecting users-->
+			<?php if (is_ideamaker($_SESSION['user_id'])) { echo'<input type="checkbox" name="project" value="project">This is a project. <!--TODO advanced project creation via connecting users-->'; } ?>
 			<input class="button" type="submit" name="submit" value="Post your idea">
 		</fieldset>
 	</form>

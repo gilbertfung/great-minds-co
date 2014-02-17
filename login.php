@@ -128,7 +128,7 @@ if (isset($_POST['login-submit'])) {
 				<input type="number" name="ind_years" placeholder="Years of Expertise">
 				<br>
 				<!-- <label>Contact Preference:</label> -->
-				<select name="contact_pref">
+				<select name="contact_pref" required>
 					<option name="contact_pref" value="" disabled selected>Contact Preference:</option>
 					<option name="contact_pref" value="byEmail">Reach me by email.</option>
 					<option name="contact_pref" value="byUrl">Through my website</option>

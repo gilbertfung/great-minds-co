@@ -147,10 +147,9 @@
 		$user_id = mysqli_real_escape_string($db, $user_id);
 		
 		$query = "SELECT * "
-				."FROM user "
-				."INNER JOIN ideamaker "
-					."ON user.user_id = ideamaker.user_id "
-				."WHERE {$user_id} "
+				."FROM user u, ideamaker i "
+				."WHERE u.user_id = i.user_id "
+				."AND u.user_id = {$user_id} "
 				."LIMIT 1";
 		$result = mysqli_query($db, $query);
 		if (!$result) { die("Database query failed."); }
@@ -272,13 +271,14 @@
 		
 		$query = "SELECT * "
 				."FROM user u, user_follows uf "
-				."WHERE u.user_id = {$user_id} " // is from this user
+				."WHERE u.user_id = uf.following_user_id "
+				."AND uf.user_id = {$user_id} " // is from this user
 		;
 		$result = mysqli_query($db, $query);
 		if (!$result) { die("Database query failed."); }
 		return $result;
-		if ($ideas = mysqli_fetch_assoc($result)) {
-			return $ideas;
+		if ($users = mysqli_fetch_assoc($result)) {
+			return $users;
 		} else {
 			return null;
 		}
@@ -303,25 +303,28 @@
 		}
 	}
 
-	function follow_button($user) {
-		global $db; 
-		$query = "SELECT following_user_id "
-				."FROM user_follows "
-				."WHERE user_id = ".$user["user_id"]; 
-		$result = mysqli_query($db, $query);
-
+	function follow_button($user) { // target user
 		$string = '<div class="follow-button">';
-		if ($row = mysqli_fetch_assoc($result)) {
-			// hide follow
-			$string .= '<button id="follow-'.$user["user_id"].'" name="follow" class="follow" style="display:none">Follow</button>';
-			$string .= '<button id="unfollow-'.$user["user_id"].'" name="unfollow" class="unfollow">Following</button>';
-		} else {
-			// hide unfollow
+		if (!isset($_SESSION['user_id'])) {$_SESSION['user_id'] = 0;}
+		$follows = find_follows_by_user_id($_SESSION['user_id']);
+		$button_set = false;
+
+		while ($initiator = mysqli_fetch_assoc($follows)) {
+			if ($initiator['following_user_id'] == $user['user_id']) {
+				// you are already following: hide follow
+				$string .= '<button id="follow-'.$user["user_id"].'" name="follow" class="follow" style="display:none">Follow</button>';
+				$string .= '<button id="unfollow-'.$user["user_id"].'" name="unfollow" class="unfollow">Following</button>';
+				$button_set = true;
+			}
+		}
+
+		if (!$button_set) { // button hasn't been set for this person
+			// you are not following: hide unfollow
 			$string .= '<button id="follow-'.$user["user_id"].'" name="follow" class="follow">Follow</button>';
 			$string .= '<button id="unfollow-'.$user["user_id"].'" name="unfollow" class="unfollow" style="display:none">Following</button>';
 		}
-		$string .= '</div>';
 
+		$string .= '</div>';
 		$string .= '<script type="text/javascript">
 			$(document).ready(function() {
 				var follow = "#follow-"+'.$user['user_id'].';
@@ -359,24 +362,27 @@
 	}
 
 	function promote_button($idea) {
-		global $db; 
-		$query = "SELECT user_id "
-				."FROM promotes "
-				."WHERE idea_id = ".$idea["idea_id"]; 
-		$result = mysqli_query($db, $query);
-
 		$string = '<div class="promote-button">';
-		if ($row = mysqli_fetch_assoc($result)) {
-			// hide promote
-			$string .= '<button id="promote-'.$idea["idea_id"].'" name="promote" class="promote" style="display:none">Promote</button>';
-			$string .= '<button id="unpromote-'.$idea["idea_id"].'" name="unpromote" class="unpromote">Promoted</button>';
-		} else {
+		if (!isset($_SESSION['user_id'])) {$_SESSION['user_id'] = 0;}
+		$promotes = find_promotes_by_user_id($_SESSION['user_id']);
+		$button_set = false;
+
+		while ($initiator = mysqli_fetch_assoc($promotes)) {
+			if ($initiator['idea_id'] == $idea['idea_id']) {
+				// hide promote
+				$string .= '<button id="promote-'.$idea["idea_id"].'" name="promote" class="promote" style="display:none">Promote</button>';
+				$string .= '<button id="unpromote-'.$idea["idea_id"].'" name="unpromote" class="unpromote">Promoted</button>';
+				$button_set = true;
+			}
+		} 
+
+		if (!$button_set) {
 			// hide unpromote
 			$string .= '<button id="promote-'.$idea["idea_id"].'" name="promote" class="promote">Promote</button>';
 			$string .= '<button id="unpromote-'.$idea["idea_id"].'" name="unpromote" class="unpromote" style="display:none">Promoted</button>';
 		}
-		$string .= '</div>';
 
+		$string .= '</div>';
 		$string .= '<script type="text/javascript">
 			$(document).ready(function() {
 				var promote = "#promote-"+'.$idea['idea_id'].';

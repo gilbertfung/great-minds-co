@@ -58,8 +58,10 @@ if (!$locations) { die("Database query failed."); }
 		<?php 
 			$people = find_all_users();
 			while ($user = mysqli_fetch_assoc($people)) {
+				$is_ideamaker = "";
+				if (is_ideamaker($user['user_id'])) {$is_ideamaker = "Ideamaker";}
 				echo '<div id="'.$user["user_id"].'" class="bar" style="background:#'.randcol().'">';
-					echo '<h3><a href="profile.php?id='.$user["user_id"].'">'.$user["name"].'</a><span class="action">'.$user["industry"].'</span></h3>';
+					echo '<h3><a href="profile.php?id='.$user["user_id"].'">'.$user["name"].'</a><span> '.$is_ideamaker.'</span><span class="action">'.$user["industry"].'</span></h3>';
 					echo follow_button($user);
 				echo '</div>'; 
 			}

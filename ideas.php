@@ -12,7 +12,7 @@ if (!$industries) { die("Database query failed."); }
 ?>
 
 <div id="cover">
-	<h2>Ideas<span class="action"><a href="?show=list">Bar</a> <a href="?show=list">Tile</a> <a href="?show=list">List</a> <a href="" id="togglefilter">Filter</a></span></h2>
+	<h2>Ideas<span class="action"><a href="?show=list">Bar</a> <a href="?show=list">Tile</a> <a href="?show=list">List</a> <a href="#" id="togglefilter">Filter</a></span></h2>
 	<form id="filter" action="filter.php?in=ideas" method="get">
 		<h3>Filter</h3>
 		<!-- <label>Industry:</label> -->
@@ -24,7 +24,7 @@ if (!$industries) { die("Database query failed."); }
 			}?>
 		</select>
 		<!--<label>Times promoted: <input type="text" name="timesPromoted"></label>-->
-		<input type="submit" value="Update list">
+		<input type="submit" name="filter" value="Update list">
 	</form>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -39,12 +39,14 @@ if (!$industries) { die("Database query failed."); }
 		});
 	</script>
 	
-	<section class="content" class="flex">
+	<section class="content flex">
 		<?php 
 			$ideas = find_all_ideas();
 			while ($idea = mysqli_fetch_assoc($ideas)) {
-				echo '<div id="idea-'.$idea["idea_id"].'" class="tile" style="background:#'.randcol().'">';
-					echo '<h3><a href="project.php?id='.$idea["idea_id"].'">'.$idea["title"].'</a></h3>';
+				$is_project = "";
+				if (is_project($idea['idea_id'])) {$is_project = "Project";}
+				echo '<div id="'.$idea["idea_id"].'" class="tile" style="background:#'.randcol().'">';
+					echo '<h3><a href="project.php?id='.$idea["idea_id"].'">'.$idea["title"].'</a><span class="action">'.$is_project.'</span></h3>';
 					echo promote_button($idea);
 				echo '</div>'; 
 			}

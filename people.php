@@ -18,7 +18,7 @@ $locations = mysqli_query($db, $query);
 if (!$locations) { die("Database query failed."); }
 ?>
 <div id="cover">
-	<h2>People<span class="action"><a href="?show=list">Bar</a> <a href="?show=list">Tile</a> <a href="?show=list">List</a> <a href="" id="togglefilter">Filter</a></span></h2>
+	<h2>People<span class="action"><a href="?show=list">Bar</a> <a href="?show=list">Tile</a> <a href="?show=list">List</a> <a href="#" id="togglefilter">Filter</a></span></h2>
 	<form id="filter" action="filter.php?in=people" method="get">
 		<h3>Filter</h3>
 		<!-- <label>Industry:</label> -->
@@ -39,7 +39,7 @@ if (!$locations) { die("Database query failed."); }
 		</select>
 
 		<!--<label>Number of Followers: <input type="text" name="followers"></label>-->
-		<input type="submit" value="Update list">
+		<input type="submit" name="filter" value="Update list">
 	</form>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -54,12 +54,12 @@ if (!$locations) { die("Database query failed."); }
 		});
 	</script>
 
-	<section class="content" class="flex">
+	<section class="content flex">
 		<?php 
-			$follows = find_follows_by_user_id($_SESSION['user_id']);
-			while ($user = mysqli_fetch_assoc($follows)) {
-				echo '<div id="follow-'.$user["user_id"].'" class="bar" style="background:#'.randcol().'">';
-					echo '<h3><a href="profile.php?id='.$user["user_id"].'">'.$user["name"].'</a></h3>';
+			$people = find_all_users();
+			while ($user = mysqli_fetch_assoc($people)) {
+				echo '<div id="'.$user["user_id"].'" class="bar" style="background:#'.randcol().'">';
+					echo '<h3><a href="profile.php?id='.$user["user_id"].'">'.$user["name"].'</a><span class="action">'.$user["industry"].'</span></h3>';
 					echo follow_button($user);
 				echo '</div>'; 
 			}

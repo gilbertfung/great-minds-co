@@ -15,28 +15,33 @@
 }
 
 .bar, .tile {
-	@include flex(1);
+	// @include flex(1);
 	padding: 2rem $rspace;
 
 	h3 {
-		margin: 0;
+		@include flex(1 100%);
+		margin-top: 0;
+		margin-left: 0;
 	}
-
+	
 	p {
 		margin-top: 0.5em;
 	}
 }
 
 .bar { // full width, one entry per row
-	background-color: $lightGreen;
+	// display: block;
+	@include flex(1 100%);
+	// background-color: $lightGreen;
 }
 
 .tile {
-	display: inline-block;
-	min-width: 20rem;
+	// display: inline-block;
+	// @include flex(1 auto);
+	width: 20rem;
 	margin-right: 1em;
-	background-color: $yellow;
-
+	// background-color: $yellow;
+	
 }
 
 .list { // compact rows

@@ -19,6 +19,7 @@
 					<?php 
 						if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 						// If logged in, show Settings
+							echo '<li>'.$_SESSION['email'].'</li>';
 							echo '<li><a href="settings.php">Settings</a></li>';
 							echo '<li><a href="logout.php">Log out</a></li>';
 						} else {

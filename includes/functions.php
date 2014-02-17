@@ -4,8 +4,11 @@
 		return header("Location: ".$url);
 	}
 
-	function randcol() {
-		return dechex(rand(0xF8F8F8, 0xFFFFFF)); //printf("#%06X\n", mt_rand(0, 0xFFFFFF));
+	function randcol() { //http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette
+		$r = dechex(round(rand(0, 63) + 190));
+		$g = dechex(round(rand(0, 63) + 190));
+		$b = dechex(round(rand(0, 63) + 190));
+		return $r.$g.$b;
 	}
 
 	// HTTPS FUNCTIONS
@@ -57,29 +60,27 @@
 		$ideamaker = $post_array['ideamaker'];
 
 		$stmt = mysqli_prepare($db, "INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		if (!$stmt) die('mysqli error: '.mysqli_error($db));
-		mysqli_stmt_bind_param($stmt, 'ssssssibs', $name, $email, $password, $location, $website, $industry, $ind_years, $bio, $contact_pref);
-		if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
+		// if (!$stmt) die('mysqli error: '.mysqli_error($db));
+		mysqli_stmt_bind_param($stmt, 'ssssssiss', $name, $email, $password, $location, $website, $industry, $ind_years, $bio, $contact_pref);
+		// if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
 		mysqli_stmt_execute($stmt);
 
-		$query = "SELECT user_id "
-				."FROM user "
-				."WHERE email = {$email}";
-		$user_id = mysqli_query($db, $query);
+		$user = find_user_by_email($email);
+		$user_id = $user['user_id'];
 
 		if ($ideamaker == true) {
 			// you're special, ideamaker.
 			$stmt = mysqli_prepare($db, "INSERT INTO ideamaker VALUES (?)");
-			if (!$stmt) die('mysqli error: '.mysqli_error($db));
+			// if (!$stmt) die('mysqli id error: '.mysqli_error($db)."<br>".print_r($user_id));
 			mysqli_stmt_bind_param($stmt, 'i', $user_id);
-			if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
+			// if (!mysqli_stmt_execute($stmt)) die('stmt  iderror: '.mysqli_stmt_error($stmt));
 			mysqli_stmt_execute($stmt);
 		} else {
 			// just a promoter
-			$stmt = mysqli_prepare($db, "INSERT INTO ideamaker VALUES (?)");
-			if (!$stmt) die('mysqli error: '.mysqli_error($db));
+			$stmt = mysqli_prepare($db, "INSERT INTO promoter VALUES (?)");
+			// if (!$stmt) die('mysqli pperror: '.mysqli_error($db));
 			mysqli_stmt_bind_param($stmt, 'i', $user_id);
-			if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
+			// if (!mysqli_stmt_execute($stmt)) die('stmt pperror: '.mysqli_stmt_error($stmt));
 			mysqli_stmt_execute($stmt);
 		}
 
@@ -89,6 +90,22 @@
 		// 		."'{$name}', '{$email}', '{$password}', '{$location}', '{$website}', '{$industry}', {$ind_years}, '{$bio}', '{$contact_pref}'"
 		// 		.")";
 		// $result = mysqli_query($db, $query);
+	}	
+
+	function update_profile($post_array) {
+		global $db;
+		$email = $_SESSION['email'];
+		$location = $post_array['location'];
+		$website = $post_array['website'];
+		$industry = strtolower($post_array['industry']);
+		$ind_years = $post_array['ind_years'];
+		$bio = $post_array['bio'];
+
+		$stmt = mysqli_prepare($db, "UPDATE user SET location=?, website=?, industry=?, ind_years=?, bio=? WHERE email = ?");
+		// if (!$stmt) die('mysqli error: '.mysqli_error($db));
+		mysqli_stmt_bind_param($stmt, 'sssiss', $location, $website, $industry, $ind_years, $bio, $email);
+		// if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
+		mysqli_stmt_execute($stmt);
 	}	
 
 	function find_user_by_email($email) {
@@ -144,6 +161,24 @@
 		}
 	}
 
+	function is_project($idea_id) {
+		global $db;
+		$idea_id = mysqli_real_escape_string($db, $idea_id);
+		
+		$query = "SELECT * "
+				."FROM idea i, project p "
+				."WHERE i.idea_id = p.idea_id "
+				."AND i.idea_id = {$idea_id} "
+				."LIMIT 1";
+		$result = mysqli_query($db, $query);
+		if (!$result) { die("Database query failed."); }
+		if ($idea = mysqli_fetch_assoc($result)) {
+			return $idea;
+		} else {
+			return null;
+		}
+	}
+
 	// DISPLAY IDEAS OR PEOPLE
 	function find_projects_by_user_id($user_id) {
 		global $db;
@@ -152,7 +187,7 @@
 		$query = "SELECT * "
 				."FROM idea i, ideamaker_project ip, project p "
 				."WHERE ip.user_id = {$user_id} "
-				."AND i.idea_id = ip.user_id "
+				."AND i.idea_id = ip.idea_id "
 				."AND i.idea_id = p.idea_id "
 		;
 		$result = mysqli_query($db, $query);
@@ -186,6 +221,17 @@
 		return $result;
 	}
 
+	function find_all_users() {
+		global $db;
+		
+		$query = "SELECT * "
+				."FROM user " // are this user's ideas
+		;
+		$result = mysqli_query($db, $query);
+		if (!$result) { die("Database query failed."); }
+		return $result;
+	}
+	
 	function find_idea_by_id($idea_id) {
 		global $db;
 		$idea_id = mysqli_real_escape_string($db, $idea_id);
@@ -197,6 +243,23 @@
 		if (!$result) { die("Database query failed."); }
 		if ($idea = mysqli_fetch_assoc($result)) {
 			return $idea;
+		} else {
+			return null;
+		}
+	}
+
+	function find_user_by_idea_id($idea_id) {
+		global $db;
+		$idea_id = mysqli_real_escape_string($db, $idea_id);
+		
+		$query = "SELECT * "
+				."FROM user u, user_thought ut, ideamaker_project ip "
+				."WHERE ut.idea_id = {$idea_id} OR ip.idea_id = {$idea_id} "
+		;
+		$result = mysqli_query($db, $query);
+		if (!$result) { die("Database query failed."); }
+		if ($user = mysqli_fetch_assoc($result)) {
+			return $user;
 		} else {
 			return null;
 		}
@@ -240,51 +303,52 @@
 		}
 	}
 
-
 	function follow_button($user) {
 		global $db; 
-		$string = '<div id="follow-'.$user["user_id"].'" class="follow-button">';
 		$query = "SELECT following_user_id "
 				."FROM user_follows "
 				."WHERE user_id = ".$user["user_id"]; 
 		$result = mysqli_query($db, $query);
+
+		$string = '<div class="follow-button">';
 		if ($row = mysqli_fetch_assoc($result)) {
 			// hide follow
-			$string .= '<button name="follow" class="follow" style="display:none">Follow</button>';
-			$string .= '<button name="unfollow" class="unfollow">Following</button>';
+			$string .= '<button id="follow-'.$user["user_id"].'" name="follow" class="follow" style="display:none">Follow</button>';
+			$string .= '<button id="unfollow-'.$user["user_id"].'" name="unfollow" class="unfollow">Following</button>';
 		} else {
 			// hide unfollow
-			$string .= '<button name="follow" class="follow">Follow</button>';
-			$string .= '<button name="unfollow" class="unfollow" style="display:none">Following</button>';
+			$string .= '<button id="follow-'.$user["user_id"].'" name="follow" class="follow">Follow</button>';
+			$string .= '<button id="unfollow-'.$user["user_id"].'" name="unfollow" class="unfollow" style="display:none">Following</button>';
 		}
 		$string .= '</div>';
 
 		$string .= '<script type="text/javascript">
 			$(document).ready(function() {
-				var item = "#follow-"+'.$user['user_id'].';
-				$(item).children(".follow").click(function() {
+				var follow = "#follow-"+'.$user['user_id'].';
+				var unfollow = "#unfollow-"+'.$user['user_id'].';
+				$(follow).click(function() {
 					var dataString = "process.php?follow="+'.$user['user_id'].';
 					$.ajax({
 						type: "POST",
 						url: dataString,
-						success: function(html) {'
-							// var $html = $(html);
-							// $html.filter("#err").appendTo("#error");
-							.'$(".follow").hide();
-							$(".unfollow").show();
+						success: function(html) {
+							//var $html = $(html);
+							//$html.filter("#err").appendTo("#error");
+							$(follow).hide();
+							$(unfollow).show();
 						}
 					});
 				});
-				$(item).children(".unfollow").click(function() {
+				$(unfollow).click(function() {
 					var dataString = "process.php?unfollow="+'.$user["user_id"].';
 					$.ajax({
 						type: "POST",
 						url: dataString,
-						success: function(html) {'
-							// var $html = $(html);
-							// $html.filter('#err').appendTo('#error');
-							.'$(".unfollow").hide();
-							$(".follow").show();
+						success: function(html) {
+							//var $html = $(html);
+							//$html.filter("#err").appendTo("#error");
+							$(unfollow).hide();
+							$(follow).show();
 						}
 					});
 				});
@@ -296,48 +360,50 @@
 
 	function promote_button($idea) {
 		global $db; 
-		$string = '<div id="promote-'.$idea["idea_id"].'" class="promote-button">';
 		$query = "SELECT user_id "
 				."FROM promotes "
 				."WHERE idea_id = ".$idea["idea_id"]; 
 		$result = mysqli_query($db, $query);
+
+		$string = '<div class="promote-button">';
 		if ($row = mysqli_fetch_assoc($result)) {
 			// hide promote
-			$string .= '<button name="promote" class="promote" style="display:none">Promote</button>';
-			$string .= '<button name="unpromote" class="unpromote">Promoted</button>';
+			$string .= '<button id="promote-'.$idea["idea_id"].'" name="promote" class="promote" style="display:none">Promote</button>';
+			$string .= '<button id="unpromote-'.$idea["idea_id"].'" name="unpromote" class="unpromote">Promoted</button>';
 		} else {
 			// hide unpromote
-			$string .= '<button name="promote" class="promote">Promote</button>';
-			$string .= '<button name="unpromote" class="unpromote" style="display:none">Promoted</button>';
+			$string .= '<button id="promote-'.$idea["idea_id"].'" name="promote" class="promote">Promote</button>';
+			$string .= '<button id="unpromote-'.$idea["idea_id"].'" name="unpromote" class="unpromote" style="display:none">Promoted</button>';
 		}
 		$string .= '</div>';
 
 		$string .= '<script type="text/javascript">
 			$(document).ready(function() {
-				var item = "#promote-"+'.$idea['idea_id'].';
-				$(item).children(".promote").click(function() {
+				var promote = "#promote-"+'.$idea['idea_id'].';
+				var unpromote = "#unpromote-"+'.$idea['idea_id'].';
+				$(promote).click(function() {
 					var dataString = "process.php?promote="+'.$idea['idea_id'].';
 					$.ajax({
 						type: "POST",
 						url: dataString,
-						success: function(html) {'
+						success: function(html) {
 							// var $html = $(html);
 							// $html.filter("#err").appendTo("#error");
-							.'$(".promote").hide();
-							$(".unpromote").show();
+							$(promote).hide();
+							$(unpromote).show();
 						}
 					});
 				});
-				$(item).children(".unpromote").click(function() {
+				$(unpromote).click(function() {
 					var dataString = "process.php?unpromote="+'.$idea['idea_id'].';
 					$.ajax({
 						type: "POST",
 						url: dataString,
-						success: function(html) {'
+						success: function(html) {
 							// var $html = $(html);
-							// $html.filter('#err').appendTo('#error');
-							.'$(".unpromote").hide();
-							$(".promote").show();
+							// $html.filter("#err").appendTo("#error");
+							$(unpromote).hide();
+							$(promote).show();
 						}
 					});
 				});

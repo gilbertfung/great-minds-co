@@ -36,17 +36,22 @@ if (isset($_POST['login-submit'])) {
 		} else {
 			// process register, try to login in with registered info and show a completion message
 			register($_POST);
+			//make_ideamaker($_POST);
 			$login = login($_POST['email'], $_POST['password']);
 
 			if ($login) {
 				// success, make rest of session logged in
 				$_SESSION['user_id'] = $login['user_id'];
 				$_SESSION['email'] = $login['email'];
+				$_SESSION['loggedin'] = true;
+				
 				if (is_ideamaker($login['user_id'])) {
 					$_SESSION['ideamaker'] = true;
 				} else {
 					$_SESSION['ideamaker'] = false;
 				}
+
+				$_SESSION['message'] = 'Thanks for registering! We hope you enjoy being a part of this community.';
 				redirect_to("index.php?action=accountCreated");
 			} else {
 				// failure, throw error
@@ -110,7 +115,7 @@ if (isset($_POST['login-submit'])) {
 				<input type="url" name="website" placeholder="http://yoursite.com">
 				<br>
 				<!-- <label>A little bit about you:</label> -->
-				<textarea name="bio" form="register" placeholder="A little bit about you..." rows="5"></textarea>
+				<textarea name="bio" placeholder="A little bit about you..." rows="5"></textarea>
 				<br>
 				<label>Profile picture:</label>
 				<input id="profile-image-input" type="file" name="profileImage">
@@ -132,7 +137,6 @@ if (isset($_POST['login-submit'])) {
 				<input type="checkbox" name="ideamaker" value="ideamaker">I am an Ideamaker. <!--TODO advanced user "upgrading"-->
 				<input class="button" type="submit" name="register-submit" value="Let's get started.">
 			</fieldset>
-			</div>
 		</form>
 	</div>
 </div>

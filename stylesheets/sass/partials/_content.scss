@@ -19,7 +19,8 @@ h2 { // Hero Title
 }
 
 h3 { // Main Heading
-	margin: 0;
+	// margin-top: 0;
+	margin-left: $rspace;
 	font-size: 1.5em;
 	font-weight: 400;
 }

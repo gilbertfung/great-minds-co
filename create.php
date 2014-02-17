@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
 
 	$query = "INSERT INTO idea VALUES (NULL, ?, ?, ?, NULL)"; // add to idea
 	$stmt = mysqli_prepare($db, $query);
-	mysqli_stmt_bind_param($stmt, 'sbs', $title, $content, $url);
+	mysqli_stmt_bind_param($stmt, 'sss', $title, $content, $url);
 	$result = mysqli_stmt_execute($stmt);
 
 	$idea_id = mysqli_insert_id($db);
@@ -32,9 +32,9 @@ if (isset($_POST['submit'])) {
 		$query = "INSERT INTO ideamaker_project VALUES (?, ?)"; // associate idea to this user 
 		if (!$stmt) die('mysqli error: '.mysqli_error($db));
 		$stmt = mysqli_prepare($db, $query);
-				if (!$stmt) die('mysqli error: '.mysqli_error($db));
+				// if (!$stmt) die('mysqli error: '.mysqli_error($db));
 		mysqli_stmt_bind_param($stmt, 'ii', $user_id, $idea_id);
-				if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
+				// if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
 		$result = mysqli_stmt_execute($stmt);
 	} else {
 		$query = "INSERT INTO thought VALUES (?)"; // associate idea to thoughts, so that it can be categorized as such
@@ -46,9 +46,9 @@ if (isset($_POST['submit'])) {
 		$query = "INSERT INTO user_thought VALUES (?, ?)"; // associate idea to this user 
 		if (!$stmt) die('mysqli error: '.mysqli_error($db));
 		$stmt = mysqli_prepare($db, $query);
-				if (!$stmt) die('mysqli error: '.mysqli_error($db));
+				// if (!$stmt) die('mysqli error: '.mysqli_error($db));
 		mysqli_stmt_bind_param($stmt, 'ii', $user_id, $idea_id);
-				if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
+				// if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
 		$result = mysqli_stmt_execute($stmt);
 	}
 	// $query = "INSERT INTO idea_tag VALUES (idea_id, ?)" // associate idea to idea_tags, so that idea can be categorized with tags
@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 	if ($result) {
 		// Success
 		$_SESSION["message"] = "Idea created.";
-		redirect_to("profile.php?id=you");
+		redirect_to("index.php");
 	} else {
 		// Failure
 		$_SESSION["message"] = "Something went wrong when the idea was being submitted.";

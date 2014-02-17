@@ -16,7 +16,11 @@ if (isset($_POST['login-submit'])) {
 		$_SESSION['user_id'] = $login['user_id'];
 		$_SESSION['email'] = $login['email'];
 		$_SESSION['loggedin'] = true;
-
+		if (is_ideamaker($login['user_id'])) {
+			$_SESSION['ideamaker'] = true;
+		} else {
+			$_SESSION['ideamaker'] = false;
+		}
 		$_SESSION['message'] = 'Hey, welcome to Great Minds!';
 		redirect_to("index.php?action=loggedin");
 	} else {
@@ -25,21 +29,29 @@ if (isset($_POST['login-submit'])) {
 	}
 } else if (isset($_POST['register-submit'])) {
 	if ($_POST['password'] === $_POST['confirmPassword']) {
-		// passwords match, process register
-		// print_r($_POST);
-		register($_POST);
-
-		// try to login in with registered info and show a completion message.
-		$login = login($_POST['email'], $_POST['password']);
-
-		if ($login) {
-			// success, make rest of session logged in
-			$_SESSION['user_id'] = $login['user_id'];
-			$_SESSION['email'] = $login['email'];
-			redirect_to("index.php?action=accountCreated");
+		// passwords match, check if duplicate
+		if (find_user_by_email($_POST['email'])) { // could work with user_id as well, but this is more logical and practical
+			// there is a duplicate user
+			$_SESSION['message'] = 'There is an account with that email already.';
 		} else {
-			// failure, throw error
-			$_SESSION['message'] = 'That\'s weird. Your email / password changed while submitting.';
+			// process register, try to login in with registered info and show a completion message
+			register($_POST);
+			$login = login($_POST['email'], $_POST['password']);
+
+			if ($login) {
+				// success, make rest of session logged in
+				$_SESSION['user_id'] = $login['user_id'];
+				$_SESSION['email'] = $login['email'];
+				if (is_ideamaker($login['user_id'])) {
+					$_SESSION['ideamaker'] = true;
+				} else {
+					$_SESSION['ideamaker'] = false;
+				}
+				redirect_to("index.php?action=accountCreated");
+			} else {
+				// failure, throw error
+				$_SESSION['message'] = 'That\'s weird. Your email / password changed while submitting.';
+			}
 		}
 	} else {
 		// passwords don't match.
@@ -116,6 +128,8 @@ if (isset($_POST['login-submit'])) {
 					<option name="contact_pref" value="byEmail">Reach me by email.</option>
 					<option name="contact_pref" value="byUrl">Through my website</option>
 				</select>
+				<br>
+				<input type="checkbox" name="ideamaker" value="ideamaker">I am an Ideamaker. <!--TODO advanced user "upgrading"-->
 				<input class="button" type="submit" name="register-submit" value="Let's get started.">
 			</fieldset>
 			</div>

@@ -37,53 +37,9 @@
 					echo $user['bio']; 
 				}?>
 			</p>
-			<?php echo '<div id="follow-'.$user["user_id"].'" class="follow-button">';
-				$query = "SELECT following_user_id "
-						."FROM user_follows "
-						."WHERE user_id = ".$user["user_id"]; 
-				$result = mysqli_query($db, $query);
-				if ($row = mysqli_fetch_assoc($result)) {
-					// hide follow
-					echo '<button class="follow" name="follow" class="follow" style="display:none">Follow</button>';
-					echo '<button class="unfollow" name="unfollow" class="follow">Following</button>';
-				} else {
-					// hide unfollow
-					echo '<button class="follow" name="follow" class="follow">Follow</button>';
-					echo '<button class="unfollow" name="unfollow" class="follow" style="display:none">Following</button>';
-				}
-			echo '</div>'; ?>
+			<?php echo follow_button($user) ?>
 		</div>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var item = '#follow-'+<?php echo $user['user_id']; ?>;
-				$(item).children('.follow').click(function() {
-					var dataString = "process.php?follow="+<?php echo $user['user_id']; ?>;
-					$.ajax({
-						type: "POST",
-						url: dataString,
-						success: function(html) {
-							// var $html = $(html);
-							// $html.filter('#err').appendTo('#error');
-							$('.follow').hide();
-							$('.unfollow').show();
-						}
-					});
-				});
-				$(item).children('.unfollow').click(function() {
-					var dataString = "process.php?unfollow="+<?php echo $user['user_id']; ?>;
-					$.ajax({
-						type: "POST",
-						url: dataString,
-						success: function(html) {
-							// var $html = $(html);
-							// $html.filter('#err').appendTo('#error');
-							$('.unfollow').hide();
-							$('.follow').show();
-						}
-					});
-				});
-			});
-		</script>
+		
 		</div>
 	</div>
 </article>
@@ -127,8 +83,8 @@
 		}
 	} else {
 		echo "No user ID specified. Who are you looking for?";
-	}*/
-?>
+	}
+
 <!--<section class="content">
 	<div id="hero">
 		<?php 
@@ -149,4 +105,5 @@
 	<div id="profile-ideas">
 		<h3>My Ideas</h3>
 	</div>
-</section>-->
+</section>-->*/
+?>

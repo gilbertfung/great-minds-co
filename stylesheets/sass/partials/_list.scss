@@ -32,7 +32,11 @@
 }
 
 .tile {
+	display: inline-block;
+	min-width: 20rem;
+	margin-right: 1em;
 	background-color: $yellow;
+
 }
 
 .list { // compact rows

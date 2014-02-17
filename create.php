@@ -12,6 +12,7 @@ if (isset($_POST['submit'])) {
 	$url = $_POST['url'];
 	$industry = $_POST['industry'];
 	// $tags = $_POST['tags'];
+	$project = $_POST['project'];
 
 	$query = "INSERT INTO idea VALUES (NULL, ?, ?, ?, NULL)"; // add to idea
 	$stmt = mysqli_prepare($db, $query);
@@ -21,22 +22,35 @@ if (isset($_POST['submit'])) {
 	$idea_id = mysqli_insert_id($db);
 	print_r($idea_id);
 
-	$query = "INSERT INTO thought VALUES (?)"; // associate idea to thoughts, so that it can be categorized as such
-	$stmt = mysqli_prepare($db, $query);
-	mysqli_stmt_bind_param($stmt, 'i', $idea_id);
-	$result = mysqli_stmt_execute($stmt);
-	// if ( !mysqli_stmt_execute($stmt) ) { die('stmt error: '.mysqli_stmt_error($stmt)); } // there is an error, but works as intended...
-	
-	$query = "INSERT INTO user_thought VALUES (?, ?)"; // associate idea to this user 
-	if (!$stmt) die('mysqli error: '.mysqli_error($db));
-	$stmt = mysqli_prepare($db, $query);
-			if (!$stmt) die('mysqli error: '.mysqli_error($db));
+	if ($project) {
+		// add to project table
+		$query = "INSERT INTO project VALUES (?)"; // associate idea to thoughts, so that it can be categorized as such
+		$stmt = mysqli_prepare($db, $query);
+		mysqli_stmt_bind_param($stmt, 'i', $idea_id);
+		$result = mysqli_stmt_execute($stmt);
 
-	mysqli_stmt_bind_param($stmt, 'ii', $user_id, $idea_id);
-			if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
-
-	$result = mysqli_stmt_execute($stmt);
-
+		$query = "INSERT INTO ideamaker_project VALUES (?, ?)"; // associate idea to this user 
+		if (!$stmt) die('mysqli error: '.mysqli_error($db));
+		$stmt = mysqli_prepare($db, $query);
+				if (!$stmt) die('mysqli error: '.mysqli_error($db));
+		mysqli_stmt_bind_param($stmt, 'ii', $user_id, $idea_id);
+				if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
+		$result = mysqli_stmt_execute($stmt);
+	} else {
+		$query = "INSERT INTO thought VALUES (?)"; // associate idea to thoughts, so that it can be categorized as such
+		$stmt = mysqli_prepare($db, $query);
+		mysqli_stmt_bind_param($stmt, 'i', $idea_id);
+		$result = mysqli_stmt_execute($stmt);
+		// if ( !mysqli_stmt_execute($stmt) ) { die('stmt error: '.mysqli_stmt_error($stmt)); } // there is an error, but works as intended...
+		
+		$query = "INSERT INTO user_thought VALUES (?, ?)"; // associate idea to this user 
+		if (!$stmt) die('mysqli error: '.mysqli_error($db));
+		$stmt = mysqli_prepare($db, $query);
+				if (!$stmt) die('mysqli error: '.mysqli_error($db));
+		mysqli_stmt_bind_param($stmt, 'ii', $user_id, $idea_id);
+				if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
+		$result = mysqli_stmt_execute($stmt);
+	}
 	// $query = "INSERT INTO idea_tag VALUES (idea_id, ?)" // associate idea to idea_tags, so that idea can be categorized with tags
 
 	if ($result) {
@@ -71,6 +85,8 @@ if (isset($_POST['submit'])) {
 			<input type="text" name="industry" placeholder="Relevant Industry or Field">
 			<br>
 			<input type="text" name="tags" placeholder="Any tags you want to put here?" disabled>
+			<br>
+			<input type="checkbox" name="project" value="project">This is a project. <!--TODO advanced project creation via connecting users-->
 			<input class="button" type="submit" name="submit" value="Post your idea">
 		</fieldset>
 	</form>

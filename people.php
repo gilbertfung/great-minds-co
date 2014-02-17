@@ -56,32 +56,14 @@ if (!$locations) { die("Database query failed."); }
 
 	<section class="content" class="flex">
 		<?php 
-			$query = "SELECT * "
-					."FROM idea ";
-					// ."WHERE $filter = 'selected tag'"; // TODO: join tags as well for filter
-			$result = mysqli_query($db, $query);
-			if (!$result) { die("Database query failed."); }
+			$follows = find_follows_by_user_id($_SESSION['user_id']);
+			while ($user = mysqli_fetch_assoc($follows)) {
+				echo '<div id="follow-'.$user["user_id"].'" class="bar" style="background:#'.randcol().'">';
+					echo '<h3><a href="profile.php?id='.$user["user_id"].'">'.$user["name"].'</a></h3>';
+					echo follow_button($user);
+				echo '</div>'; 
+			}
 		?>
-		<div id="12345" class="bar">
-			<h3><a href="profile.php">First Last</a></h3>
-			<p><a href="people.php?industry=tag">Tag Name 1</a>, <a href="people.php?industry=tag">Tag Name 2</a></p>
-			<div class="follow-button">
-				<button name="follow" class="follow">Follow</button>
-			</div>
-		</div>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('.content').on('click', 'button', function() {
-					$.ajax({
-						type: "POST",
-						url: "process.php?follow=12345",
-						success: function() {
-							$('#12345 button').css('background-color', '#a8eff0').text("Followed!");
-						}
-					});
-				});
-			});
-		</script>
 	</section>
 </div>
 </section>

@@ -41,32 +41,14 @@ if (!$industries) { die("Database query failed."); }
 	
 	<section class="content" class="flex">
 		<?php 
-			$query = "SELECT * "
-					."FROM idea ";
-					// ."WHERE $filter = 'selected tag'"; // TODO: join tags as well for filter
-			$result = mysqli_query($db, $query);
-			if (!$result) { die("Database query failed."); }
+			$ideas = find_all_ideas();
+			while ($idea = mysqli_fetch_assoc($ideas)) {
+				echo '<div id="idea-'.$idea["idea_id"].'" class="tile" style="background:#'.randcol().'">';
+					echo '<h3><a href="project.php?id='.$idea["idea_id"].'">'.$idea["title"].'</a></h3>';
+					echo promote_button($idea);
+				echo '</div>'; 
+			}
 		?>
-		<div id="12345" class="tile">
-			<h3><a href="project.php">Idea name</a></h3>
-			<p>by <a href="profile.php">John</a>, <a href="profile.php">Alice</a></p>
-			<div class="promote-button">
-				<button name="promote" class="promote">Promote</button>
-			</div>
-		</div>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('.content').on('click', 'button', function() {
-					$.ajax({
-						type: "POST",
-						url: "process.php?promote=12345",
-						success: function() {
-							$('#12345 button').css('background-color', '#a8eff0').text("Promoted!");
-						}
-					});
-				});
-			});
-		</script>
 	</section>
 </div>
 </section> <!--#topic-->

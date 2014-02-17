@@ -2,7 +2,7 @@
  * MAIN CONTENT *
  * ------------ */
 
-h1, h2, h3, h4 {
+h1, h2, h4 {
 	padding-left: $rspace;
 	padding-right: $rspace;
 }
@@ -19,7 +19,7 @@ h2 { // Hero Title
 }
 
 h3 { // Main Heading
-	// margin: 0;
+	margin: 0;
 	font-size: 1.5em;
 	font-weight: 400;
 }
@@ -31,13 +31,14 @@ h4 { // Sub Heading
 #post-message {
 	margin: 0;
 	text-align: center;
+	font-weight: 700;
 	background-color: $lightGray;
 }
 
-.follow {
+.follow, .promote {
 	//background-color: ;
 }
-.unfollow {
+.unfollow, .unpromote {
 	background-color: $cyan;
 }
 

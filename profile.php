@@ -76,7 +76,7 @@
 	<div class="bar flex">
 		<h3><?php echo $user['name']; ?>'s Ideas <span class="action"><a href="create.php">Create a new Idea</a></span></h3>
 		<?php 
-			$ideas = find_ideas_by_user_id($_SESSION['user_id']);
+			$ideas = find_ideas_by_user_id($user['user_id']);
 
 			while ($idea = mysqli_fetch_assoc($ideas)) {
 				echo '<div id="idea-'.$idea["idea_id"].'" class="tile" style="background:#'.randcol().'">';
@@ -89,7 +89,7 @@
 	<div class="bar flex">
 		<h3><?php echo $user['name']; ?>'s Follows</h3>
 		<?php 
-			$follows = find_follows_by_user_id($_SESSION['user_id']);
+			$follows = find_follows_by_user_id($user['user_id']);
 			while ($auser = mysqli_fetch_assoc($follows)) {
 				echo '<div id="follow-'.$auser["user_id"].'" class="tile" style="background:#'.randcol().'">';
 					echo '<h3><a href="profile.php?id='.$auser["user_id"].'">'.$auser["name"].'</a></h3>';
@@ -101,7 +101,7 @@
 	<div class="bar flex">
 		<h3><?php echo $user['name']; ?>'s Promotes</h3>
 		<?php 
-			$promotes = find_promotes_by_user_id($_SESSION['user_id']);
+			$promotes = find_promotes_by_user_id($user['user_id']);
 			while ($idea = mysqli_fetch_assoc($promotes)) {
 				echo '<div id="promote-'.$idea["idea_id"].'" class="tile" style="background:#'.randcol().'">';
 					echo '<h3><a href="project.php?id='.$idea["idea_id"].'">'.$idea["title"].'</a></h3>';
@@ -112,11 +112,12 @@
 	</div>
 </section>
 <aside class="flex">
+	<?php if (!empty($user['twitter_userid'])) { ?>
 	<div class="bar">
 		<h3><?php echo $user['name']; ?>'s Tweets</h3>
 		<ul>
 			<?php 
-				$username = find_user_by_id($_SESSION['user_id']);
+				$username = find_user_by_id($user['user_id']);
 				$tweets = get_latest_tweets($username['twitter_userid']);
 				foreach ($tweets as $tweet) {
 					echo '<li>';
@@ -130,11 +131,13 @@
 			?>
 		</ul>
 	</div>
+	<?php } ?>
+	<?php if (!empty($user['flickr_userid'])) { ?>
 	<div class="bar">
 		<h3><?php echo $user['name']; ?>'s Flickr Photostream</h3>
 		<ul>
 			<?php 
-				$username = find_user_by_id($_SESSION['user_id']);
+				$username = find_user_by_id($user['user_id']);
 				$photos = get_latest_photos($username['flickr_userid']);
 				foreach ($photos['photo'] as $photo) {
 					echo '<li>';
@@ -146,6 +149,7 @@
 			?>
 		</ul>
 	</div>
+	<?php } ?>
 </aside>
 
 </div>

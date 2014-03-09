@@ -12,7 +12,14 @@ if (!$industries) { die("Database query failed."); }
 ?>
 
 <div id="cover">
-	<h2>Ideas<span class="action"><a href="?show=list">Bar</a> <a href="?show=list">Tile</a> <a href="?show=list">List</a> <a href="#" id="togglefilter">Filter</a></span></h2>
+	<h2>Ideas
+		<span class="action">
+			<a id="viewbar" href="#">Bar</a> 
+			<a id="viewtile" href="#">Tile</a> 
+			<a id="viewlist" href="#">List</a> 
+			<a href="#" id="togglefilter">Filter</a>
+		</span>
+	</h2>
 	<form id="filter" action="filter.php?in=ideas" method="get">
 		<h3>Filter</h3>
 		<!-- <label>Industry:</label> -->
@@ -36,6 +43,15 @@ if (!$industries) { die("Database query failed."); }
 					$("#filter").hide();
 				}
 			});
+			$("#viewbar").click(function() {
+				$(".content div").attr("class", "bar");
+			})
+			$("#viewtile").click(function() {
+				$(".content div").attr("class", "tile");
+			})
+			$("#viewlist").click(function() {
+				$(".content div").attr("class", "list");
+			})
 		});
 	</script>
 	

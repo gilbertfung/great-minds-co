@@ -1057,6 +1057,21 @@ button {
   margin-right: 1em;
 }
 
+/* line 47, sass/partials/_list.scss */
+.list {
+  -webkit-box-flex: 1 100%;
+  -webkit-flex: 1 100%;
+  -moz-box-flex: 1 100%;
+  -moz-flex: 1 100%;
+  -ms-flex: 1 100%;
+  flex: 1 100%;
+}
+/* line 50, sass/partials/_list.scss */
+.list h3 {
+  margin: 1rem 0;
+  padding-left: 3rem;
+}
+
 /* ------- *
  * $FOOTER *
  * ------- */

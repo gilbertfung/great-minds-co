@@ -45,5 +45,10 @@
 }
 
 .list { // compact rows
+	@include flex(1 100%);
 
+	h3 {
+		margin: 1rem 0;
+		padding-left: 3rem;
+	}
 }

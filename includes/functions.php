@@ -1,5 +1,5 @@
 <?php 
-	// GENERAL FUNCTIONS
+// GENERAL FUNCTIONS
 	function redirect_to($url) {
 		return header("Location: ".$url);
 	}
@@ -27,7 +27,7 @@
 		}
 	}
 
-	// LOGIN / REGISTRATION / AUTHENTICATION FUNCTIONS
+// LOGIN / REGISTRATION / AUTHENTICATION FUNCTIONS
 	function login($email, $password) {
 		$user = find_user_by_email($email);
 		if ($user) {
@@ -101,9 +101,12 @@
 		$ind_years = $post_array['ind_years'];
 		$bio = $post_array['bio'];
 
-		$stmt = mysqli_prepare($db, "UPDATE user SET location=?, website=?, industry=?, ind_years=?, bio=? WHERE email = ?");
+		$twitter_userid = get_twitter_id_by_username($post_array['twitter_username']);
+		$flickr_userid = get_flickr_id_by_username($post_array['flickr_username']);
+
+		$stmt = mysqli_prepare($db, "UPDATE user SET location=?, website=?, industry=?, ind_years=?, bio=?, twitter_userid=?, flickr_userid=? WHERE email = ?");
 		// if (!$stmt) die('mysqli error: '.mysqli_error($db));
-		mysqli_stmt_bind_param($stmt, 'sssiss', $location, $website, $industry, $ind_years, $bio, $email);
+		mysqli_stmt_bind_param($stmt, 'sssissss', $location, $website, $industry, $ind_years, $bio, $twitter_userid, $flickr_userid, $email);
 		// if (!mysqli_stmt_execute($stmt)) die('stmt error: '.mysqli_stmt_error($stmt));
 		mysqli_stmt_execute($stmt);
 	}	
@@ -178,7 +181,7 @@
 		}
 	}
 
-	// DISPLAY IDEAS OR PEOPLE
+// DISPLAY IDEAS OR PEOPLE
 	function find_projects_by_user_id($user_id) {
 		global $db;
 		$user_id = mysqli_real_escape_string($db, $user_id);
@@ -264,7 +267,7 @@
 		}
 	}
 
-	// FOLLOW AND PROMOTE FEATURES
+// FOLLOW AND PROMOTE FEATURES
 	function find_follows_by_user_id($user_id) {
 		global $db;
 		$user_id = mysqli_real_escape_string($db, $user_id);
@@ -449,6 +452,50 @@
 		$result = mysqli_stmt_execute($stmt);
 	}
 
+// API FUNCTIONS
+	function get_twitter_id_by_username($username) {
+		global $cb; 
+
+		// Create query
+		$params = array(
+			'screen_name' => $username
+		);
+			
+		// Make the REST call
+		$result = (array) $cb->users_show($params);
+		// Convert results to an associative array
+		$data = json_decode(json_encode($result), true);
+		return $data['id_str'];
+	}
+
+	function get_flickr_id_by_username($username) {
+		global $f;
+
+		$f->people_findByUsername($username);
+		return $f->parsed_response['user']['id'];
+	}
+
+	function get_username_by_twitter_id($id) {
+		global $cb; 
+
+		// Create query
+		$params = array(
+			'user_id' => $id
+		);
+			
+		// Make the REST call
+		$result = (array) $cb->users_show($params);
+		// Convert results to an associative array
+		$data = json_decode(json_encode($result), true);
+		return $data['screen_name'];
+	}
+
+	function get_username_by_flickr_id($id) {
+		global $f;
+
+		$f->people_getInfo($id);
+		return $f->parsed_response['person']['username'];
+	}
 /*
 	// reusable code to quickly load formatted content from databse
 	function loadEntities()	{

@@ -18,7 +18,14 @@ $locations = mysqli_query($db, $query);
 if (!$locations) { die("Database query failed."); }
 ?>
 <div id="cover">
-	<h2>People<span class="action"><a href="?show=list">Bar</a> <a href="?show=list">Tile</a> <a href="?show=list">List</a> <a href="#" id="togglefilter">Filter</a></span></h2>
+	<h2>People
+		<span class="action">
+			<a id="viewbar" href="#">Bar</a> 
+			<a id="viewtile" href="#">Tile</a> 
+			<a id="viewlist" href="#">List</a> 
+			<a href="#" id="togglefilter">Filter</a>
+		</span>
+	</h2>
 	<form id="filter" action="filter.php?in=people" method="get">
 		<h3>Filter</h3>
 		<!-- <label>Industry:</label> -->
@@ -51,6 +58,15 @@ if (!$locations) { die("Database query failed."); }
 					$("#filter").hide();
 				}
 			});
+			$("#viewbar").click(function() {
+				$(".content > div").attr("class", "bar");
+			})
+			$("#viewtile").click(function() {
+				$(".content > div").attr("class", "tile");
+			})
+			$("#viewlist").click(function() {
+				$(".content > div").attr("class", "list");
+			})
 		});
 	</script>
 

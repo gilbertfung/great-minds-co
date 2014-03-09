@@ -1,5 +1,6 @@
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/dbconnect.php'; ?>
+<?php require_once 'includes/apiconfig.php'; ?>
 <?php require_once 'includes/functions.php'; ?>
 <?php require_once 'includes/layouts/header.php'; ?>
 <?php requireSSL(false); 
@@ -56,7 +57,7 @@
 		</div>	
 	</div>
 	<div class="bar flex">
-	<?php if (is_ideamaker($user['user_id']) == true) {
+		<?php if (is_ideamaker($user['user_id']) == true) {
 		echo '<h3>'.$user['name'].'\'s Projects <span class="action"></span></h3>';
 		$projects = find_projects_by_user_id($_SESSION['user_id']);
 
@@ -109,8 +110,43 @@
 			}
 		?>
 	</div>
-</div>
 </section>
+<aside class="flex">
+	<div class="bar">
+		<h3><?php echo $user['name']; ?>'s Tweets</h3>
+		<ul>
+			<?php 
+				$username = find_user_by_id($_SESSION['user_id']);
+				$tweets = get_latest_tweets($username['twitter_userid']);
+				foreach ($tweets as $tweet) {
+					echo '<li>';
+						echo $tweet['text'];
+						// echo '<br/>';
+						// if(!empty($item['entities']['media']['0']['media_url'])){
+						// 	echo "<img src=\"".$item['entities']['media']['0']['media_url']."\" width=\"200\" height=\"200\"/>"; //getting the profile image
+						// }
+					echo '</li>'; 
+				}
+			?>
+		</ul>
+	</div>
+	<div class="bar">
+		<h3><?php echo $user['name']; ?>'s Flickr Photostream</h3>
+		<ul>
+			<?php 
+				$username = find_user_by_id($_SESSION['user_id']);
+				$photos = get_latest_photos($username['flickr_userid']);
+				foreach ($photos['photo'] as $photo) {
+					echo '<li>';
+						echo '<a href="'.$f->buildPhotoURL($photo, 'medium').'">
+					        <img class="thumbs" src="'.$f->buildPhotoURL($photo, 'square').'">
+					        </a>';
+					echo '</li>'; 
+				}
+			?>
+		</ul>
+	</div>
+</aside>
 
 </div>
 </section>

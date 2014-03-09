@@ -496,6 +496,29 @@
 		$f->people_getInfo($id);
 		return $f->parsed_response['person']['username'];
 	}
+
+	function get_latest_tweets($id) {
+		global $cb; 
+
+		// Create query
+		$params = array(
+			'user_id' => $id,
+			'count' => 5
+		);
+			
+		// Make the REST call
+		$result = (array) $cb->statuses_userTimeline($params);
+		// Convert results to an associative array
+		$data = json_decode(json_encode($result), true);
+		return $data;
+	}
+
+	function get_latest_photos($id) {
+		global $f;
+
+		$f->people_getPublicPhotos($id, NULL, NULL, 5, 1);
+		return $f->parsed_response['photos'];
+	}
 /*
 	// reusable code to quickly load formatted content from databse
 	function loadEntities()	{

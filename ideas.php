@@ -9,6 +9,7 @@ $query = "SELECT * "
 		."WHERE tag_type = 'industry'";
 $industries = mysqli_query($db, $query);
 if (!$industries) { die("Database query failed."); }
+
 ?>
 
 <div id="cover">
@@ -20,7 +21,7 @@ if (!$industries) { die("Database query failed."); }
 			<a href="#" id="togglefilter">Filter</a>
 		</span>
 	</h2>
-	<form id="filter" action="filter.php?in=ideas" method="get">
+	<form id="filter" name="filter" action="ideas.php" method="get">
 		<h3>Filter</h3>
 		<!-- <label>Industry:</label> -->
 		<select name="industry">
@@ -29,9 +30,11 @@ if (!$industries) { die("Database query failed."); }
 			while ($row = mysqli_fetch_assoc($industries)) { // queries industry
 				echo '<option value="'.$row['tag_name'].'">'.$row['tag_name'].'</option>';
 			}?>
-		</select>
+		</select><br>
 		<!--<label>Times promoted: <input type="text" name="timesPromoted"></label>-->
-		<input type="submit" name="filter" value="Update list">
+		<input type="checkbox" name="ideas" checked>Ideas<br>
+		<input type="checkbox" name="projects" checked>Projects<br>
+		<input type="submit" name="submit" value="Update">
 	</form>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -57,7 +60,18 @@ if (!$industries) { die("Database query failed."); }
 	
 	<section class="content flex">
 		<?php 
-			$ideas = find_all_ideas();
+			$ideas;
+			if (isset($_GET['submit'])) {
+				if (isset($_GET['ideas']) && !isset($_GET['projects'])) {
+					$ideas = find_all_ideas_only();
+				} else if (isset($_GET['projects']) && !isset($_GET['ideas'])) {
+					$ideas = find_all_projects_only();
+				} else {
+					$ideas = find_all_ideas();
+				}
+			} else {
+				$ideas = find_all_ideas();
+			}
 			while ($idea = mysqli_fetch_assoc($ideas)) {
 				$is_project = "";
 				if (is_project($idea['idea_id'])) {$is_project = "Project";}

@@ -933,45 +933,50 @@ form input, form textarea, form select {
   border-top: 1px solid #c0c0c0;
 }
 /* line 37, sass/partials/_forms.scss */
+form input[type=checkbox] {
+  display: inline-block;
+  width: auto;
+}
+/* line 41, sass/partials/_forms.scss */
 form input[type=submit] {
   display: block;
   margin: 1rem 0 0 0;
   padding: 0.5rem;
 }
 
-/* line 64, sass/partials/_forms.scss */
+/* line 68, sass/partials/_forms.scss */
 #login, #register {
   width: 28em;
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 70, sass/partials/_forms.scss */
+/* line 74, sass/partials/_forms.scss */
 #register {
   position: relative;
   right: 0;
 }
 
-/* line 75, sass/partials/_forms.scss */
+/* line 79, sass/partials/_forms.scss */
 #togglefilter {
   cursor: pointer;
 }
 
-/* line 79, sass/partials/_forms.scss */
+/* line 83, sass/partials/_forms.scss */
 #filter {
   background-color: #c5c5c5;
 }
-/* line 81, sass/partials/_forms.scss */
+/* line 85, sass/partials/_forms.scss */
 #filter h3 {
   margin-bottom: 0;
 }
-/* line 84, sass/partials/_forms.scss */
+/* line 88, sass/partials/_forms.scss */
 #filter select, #filter input[type=submit] {
   display: inline-block;
   width: 15em;
 }
 
-/* line 90, sass/partials/_forms.scss */
+/* line 94, sass/partials/_forms.scss */
 button {
   display: block;
   width: 6em;

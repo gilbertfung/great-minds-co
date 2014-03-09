@@ -223,6 +223,30 @@
 		return $result;
 	}
 
+	function find_all_ideas_only() {
+		global $db;
+		
+		$query = "SELECT * "
+				."FROM idea, thought "
+				."WHERE idea.idea_id = thought.idea_id "
+		;
+		$result = mysqli_query($db, $query);
+		if (!$result) { die("Database query failed."); }
+		return $result;
+	}
+
+	function find_all_projects_only() {
+		global $db;
+		
+		$query = "SELECT * "
+				."FROM idea, project "
+				."WHERE idea.idea_id = project.idea_id "
+		;
+		$result = mysqli_query($db, $query);
+		if (!$result) { die("Database query failed."); }
+		return $result;
+	}
+
 	function find_all_users() {
 		global $db;
 		

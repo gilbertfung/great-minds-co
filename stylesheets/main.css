@@ -1004,9 +1004,12 @@ button {
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
 }
 
-/* line 10, sass/partials/_list.scss */
+/* line 13, sass/partials/_list.scss */
 .section {
   -webkit-box-flex: 66%;
   -webkit-flex: 66%;
@@ -1016,7 +1019,7 @@ button {
   flex: 66%;
 }
 
-/* line 13, sass/partials/_list.scss */
+/* line 16, sass/partials/_list.scss */
 .side {
   -webkit-box-flex: 33%;
   -webkit-flex: 33%;
@@ -1026,11 +1029,11 @@ button {
   flex: 33%;
 }
 
-/* line 17, sass/partials/_list.scss */
+/* line 20, sass/partials/_list.scss */
 .bar, .tile {
   padding: 2rem 3rem;
 }
-/* line 21, sass/partials/_list.scss */
+/* line 24, sass/partials/_list.scss */
 .bar h3, .tile h3 {
   -webkit-box-flex: 1 100%;
   -webkit-flex: 1 100%;
@@ -1041,12 +1044,12 @@ button {
   margin-top: 0;
   margin-left: 0;
 }
-/* line 27, sass/partials/_list.scss */
+/* line 30, sass/partials/_list.scss */
 .bar p, .tile p {
   margin-top: 0.5em;
 }
 
-/* line 32, sass/partials/_list.scss */
+/* line 35, sass/partials/_list.scss */
 .bar {
   -webkit-box-flex: 1 100%;
   -webkit-flex: 1 100%;
@@ -1056,13 +1059,13 @@ button {
   flex: 1 100%;
 }
 
-/* line 38, sass/partials/_list.scss */
+/* line 41, sass/partials/_list.scss */
 .tile {
   width: 20rem;
   margin-right: 1em;
 }
 
-/* line 47, sass/partials/_list.scss */
+/* line 50, sass/partials/_list.scss */
 .list {
   -webkit-box-flex: 1 100%;
   -webkit-flex: 1 100%;
@@ -1071,10 +1074,17 @@ button {
   -ms-flex: 1 100%;
   flex: 1 100%;
 }
-/* line 50, sass/partials/_list.scss */
+/* line 53, sass/partials/_list.scss */
 .list h3 {
   margin: 1rem 0;
   padding-left: 3rem;
+}
+
+/* line 59, sass/partials/_list.scss */
+li.tile {
+  background-size: cover;
+  min-height: 10em;
+  margin-top: 1em;
 }
 
 /* ------- *

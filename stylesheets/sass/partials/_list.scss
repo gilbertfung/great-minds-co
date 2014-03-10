@@ -6,6 +6,9 @@
 	@include flexbox;
 	@include flex-flow(row wrap);
 	@include justify-content(space-between);
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
 }
 .section {
 	@include flex(66%);
@@ -52,3 +55,10 @@
 		padding-left: 3rem;
 	}
 }
+
+li.tile {
+	background-size: cover ;//100% auto;
+	min-height: 10em;
+	margin-top: 1em;
+}
+

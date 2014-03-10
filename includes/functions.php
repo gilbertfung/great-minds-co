@@ -278,14 +278,55 @@
 		global $db;
 		$idea_id = mysqli_real_escape_string($db, $idea_id);
 		
-		$query = "SELECT * "
-				."FROM user u, user_thought ut, ideamaker_project ip "
-				."WHERE ut.idea_id = {$idea_id} OR ip.idea_id = {$idea_id} "
-		;
+		$query; 
+		if (is_project($idea_id)) {
+			$query = "SELECT * "
+					."FROM user u, ideamaker_project ip "
+					."WHERE u.user_id = ip.user_id "
+					."AND ip.idea_id = {$idea_id} "
+			;
+		} else {
+			$query = "SELECT * "
+					."FROM user u, user_thought ut "
+					."WHERE u.user_id = ut.user_id "
+					."AND ut.idea_id = {$idea_id} "
+			;
+		}
 		$result = mysqli_query($db, $query);
 		if (!$result) { die("Database query failed."); }
 		if ($user = mysqli_fetch_assoc($result)) {
 			return $user;
+		} else {
+			return null;
+		}
+	}
+
+// DISPLAY PROJECT UPDATES
+	function find_all_updates_by_project($idea_id) {
+		global $db;
+		
+		$query = "SELECT `update`.update_id, `update`.update_name, `update`.date_created, `update`.content "
+				."FROM `update`, project_update, project "
+				."WHERE project_update.idea_id = project.idea_id "
+				."AND project_update.idea_id = {$idea_id} "
+		;
+		$result = mysqli_query($db, $query);
+		if (!$result) { die("Database query failed."); }
+		return $result;
+	}
+
+	function is_project_owner($idea_id, $user_id) {
+		global $db;
+		
+		$query = "SELECT * "
+				."FROM ideamaker_project "
+				."WHERE ideamaker_project.idea_id = {$idea_id} "
+				."AND ideamaker_project.user_id = {$user_id} "
+				."LIMIT 1";
+		$result = mysqli_query($db, $query);
+		if (!$result) { die("Database query failed."); }
+		if ($idea = mysqli_fetch_assoc($result)) {
+			return $idea;
 		} else {
 			return null;
 		}
@@ -527,7 +568,7 @@
 		// Create query
 		$params = array(
 			'user_id' => $id,
-			'count' => 5
+			'count' => 6
 		);
 			
 		// Make the REST call
@@ -540,7 +581,7 @@
 	function get_latest_photos($id) {
 		global $f;
 
-		$f->people_getPublicPhotos($id, NULL, NULL, 5, 1);
+		$f->people_getPublicPhotos($id, NULL, NULL, 6, 1);
 		return $f->parsed_response['photos'];
 	}
 /*

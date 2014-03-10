@@ -115,38 +115,38 @@
 	<?php if (!empty($user['twitter_userid'])) { ?>
 	<div class="bar">
 		<h3><?php echo $user['name']; ?>'s Tweets</h3>
-		<ul>
-			<?php 
-				$username = find_user_by_id($user['user_id']);
-				$tweets = get_latest_tweets($username['twitter_userid']);
-				foreach ($tweets as $tweet) {
-					echo '<li>';
+		<ul id="flickrphotos" class="flex">
+		<?php 
+			$username = find_user_by_id($user['user_id']);
+			$tweets = get_latest_tweets($username['twitter_userid']);
+			foreach ($tweets as $tweet) {
+				if (!empty($tweet['text'])) {
+					echo '<li class="tile" style="background:#'.randcol().'">';
 						echo $tweet['text'];
-						// echo '<br/>';
-						// if(!empty($item['entities']['media']['0']['media_url'])){
-						// 	echo "<img src=\"".$item['entities']['media']['0']['media_url']."\" width=\"200\" height=\"200\"/>"; //getting the profile image
-						// }
+						echo '<p><a href="http://twitter.com/'.$tweet['user']['id_str'].'/status/'.$tweet['id_str'].'">';
+						echo 'View this Tweet</a></p>';
 					echo '</li>'; 
 				}
-			?>
+			}
+		?>
 		</ul>
 	</div>
 	<?php } ?>
 	<?php if (!empty($user['flickr_userid'])) { ?>
 	<div class="bar">
 		<h3><?php echo $user['name']; ?>'s Flickr Photostream</h3>
-		<ul>
-			<?php 
-				$username = find_user_by_id($user['user_id']);
-				$photos = get_latest_photos($username['flickr_userid']);
-				foreach ($photos['photo'] as $photo) {
-					echo '<li>';
-						echo '<a href="'.$f->buildPhotoURL($photo, 'medium').'">
-					        <img class="thumbs" src="'.$f->buildPhotoURL($photo, 'square').'">
-					        </a>';
+		<ul class="flex">
+		<?php 
+			$username = find_user_by_id($user['user_id']);
+			$photos = get_latest_photos($username['flickr_userid']);
+			foreach ($photos['photo'] as $photo) {
+				echo '<a href="'.$f->buildPhotoURL($photo).'">';
+					echo '<li class="tile" style="background-image:url('.$f->buildPhotoURL($photo, 'medium').')">';
+						// echo '<img style="background:url('.$f->buildPhotoURL($photo, 'small').')">';
 					echo '</li>'; 
-				}
-			?>
+				echo '</a>';
+			}
+		?>
 		</ul>
 	</div>
 	<?php } ?>

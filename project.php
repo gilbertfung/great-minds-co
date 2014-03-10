@@ -4,6 +4,8 @@
 <?php require_once 'includes/layouts/header.php'; ?>
 <?php requireSSL(false); 
 
+$idea;
+
 if (isset($_GET['id'])) {
 	$idea = find_idea_by_id($_GET['id']);
 } else {
@@ -42,7 +44,34 @@ if (isset($_GET['id'])) {
 			</table>
 		</div>
 	</div>
+	<div class="flex bar">
+		<h3>Project Updates 
+			<span class="action">
+				<?php 
+					if (is_project($idea['idea_id'])) {
+						if (is_project_owner($idea['idea_id'], $_SESSION['user_id'])) {// if this project owner is current user...
+							$_SESSION['idea_id'] = $idea['idea_id'];
+							echo '<a href="update.php">Create a new update</a>';
+						}
+					}
+				?>
+			</span>
+		</h3>
+		<?php 
+			if (is_project($idea['idea_id'])) {
+				$updates = find_all_updates_by_project($idea['idea_id']);
+				while ($update = mysqli_fetch_assoc($updates)) {
+					echo '<div id="'.$update["update_id"].'" class="bar" style="background:#'.randcol().'">';
+						echo '<h3>'.$update["update_name"].'<span class="action">'.$update['date_created'].'</span></h3>';
+						echo '<p>'.$update['content'].'</p>';
+					echo '</div>'; 
+				}
+			}
+		?>
+	</div>
 </section>
+
+
 </div>
 </section>
 <?php require 'includes/layouts/footer.php'; ?>

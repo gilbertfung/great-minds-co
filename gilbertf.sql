@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2014 at 12:28 PM
+-- Generation Time: Mar 10, 2014 at 05:10 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -136,6 +136,13 @@ CREATE TABLE IF NOT EXISTS `ideamaker_update` (
   KEY `update_id` (`update_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `ideamaker_update`
+--
+
+INSERT INTO `ideamaker_update` (`user_id`, `update_id`) VALUES
+(1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -186,6 +193,13 @@ CREATE TABLE IF NOT EXISTS `project_update` (
   PRIMARY KEY (`idea_id`,`update_id`),
   KEY `update_id` (`update_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `project_update`
+--
+
+INSERT INTO `project_update` (`idea_id`, `update_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -310,10 +324,17 @@ DROP TABLE IF EXISTS `update`;
 CREATE TABLE IF NOT EXISTS `update` (
   `update_id` int(8) NOT NULL AUTO_INCREMENT,
   `update_name` varchar(160) COLLATE utf8_unicode_ci NOT NULL,
-  `date_created` date NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `content` mediumblob NOT NULL,
   PRIMARY KEY (`update_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `update`
+--
+
+INSERT INTO `update` (`update_id`, `update_name`, `date_created`, `content`) VALUES
+(1, 'This is an update', '2014-03-10 00:10:36', 0x49206c696b6520746f206d616b6520757064617465732e);
 
 -- --------------------------------------------------------
 
@@ -333,6 +354,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `ind_years` tinyint(2) NOT NULL,
   `bio` text COLLATE utf8_unicode_ci NOT NULL,
   `contact_pref` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `twitter_userid` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `flickr_userid` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `userid` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
@@ -341,15 +364,15 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `location`, `website`, `industry`, `ind_years`, `bio`, `contact_pref`) VALUES
-(1, 'John Smith 001', '001@email.com', '$2y$10$nkGwGC0egNplnv8J6iZ.VeZdtQV3wSfmcDekoodwF28Djb/70rS0y', 'Vancouver', 'http://localhost', 'design', 5, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail'),
-(2, 'Jane Smith', '002@email.com', '$2y$10$062ZmBuGP1COrlUOok/CEuskwFudjQaQIi1L1aLayhoQyxwNsJ6qa', 'Seattle', 'http://8.8.8.8', 'software', 6, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail'),
-(3, 'Alex Jones', '003@email.com', '$2y$10$JQT92ssDtLcxhUPtz3caBeC2Q9PdafNhvKe0pZurkoK817G/l7A/W', 'Vancouver', '', 'business', 23, '', 'byEmail'),
-(4, 'Alice Gnjek', '004@email.com', '$2y$10$OSNpL5/LVWusU9BcnmB70.mS2gFhz./yePwCMTIE/NLPI95j7KBum', 'New York', 'http://gnjek.com', 'business', 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byUrl'),
-(5, 'Gaetan Price', '005@email.com', '$2y$10$3zAM.G033yfpn/0EUFYFJOE0upTTJdpco1Giv9gRyrDAeyocE8izG', 'Paris', 'http://gaetanprice.com', '', 0, '', 'byUrl'),
-(6, 'Flynn Norman', '006@email.com', '$2y$10$VcG3a7lYlXNjoZJ5ZyK04ubbns/Gyk6gXELebSsFZJGKZB4.VEVI6', 'Stockholm', '', 'design', 12, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail'),
-(7, 'Mark Swarm', '007@email.com', '$2y$10$z0DL6gTb2Qc1.7PnE2E.X.xDaAr3oFDmWCzuEpWwtsKJLFMWCFK5S', '', '', 'business', 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byUrl'),
-(8, 'Peter Olman', '008@email.com', '$2y$10$tRTMUrbk.QMybjQyGM2i1eh0Ds9jHecpxE3LJXAFAh81n/BXONOym', 'Toronto', 'http://oman-olm.an', 'design', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail');
+INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `location`, `website`, `industry`, `ind_years`, `bio`, `contact_pref`, `twitter_userid`, `flickr_userid`) VALUES
+(1, 'John Smith 001', '001@email.com', '$2y$10$nkGwGC0egNplnv8J6iZ.VeZdtQV3wSfmcDekoodwF28Djb/70rS0y', 'Vancouver', 'http://localhost', 'design', 5, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '59034638', '78817275@N04'),
+(2, 'Jane Smith', '002@email.com', '$2y$10$062ZmBuGP1COrlUOok/CEuskwFudjQaQIi1L1aLayhoQyxwNsJ6qa', 'Seattle', 'http://8.8.8.8', 'software', 6, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '', '12345678@N04'),
+(3, 'Alex Jones', '003@email.com', '$2y$10$JQT92ssDtLcxhUPtz3caBeC2Q9PdafNhvKe0pZurkoK817G/l7A/W', 'Vancouver', '', 'business', 23, '', 'byEmail', '', ''),
+(4, 'Alice Gnjek', '004@email.com', '$2y$10$OSNpL5/LVWusU9BcnmB70.mS2gFhz./yePwCMTIE/NLPI95j7KBum', 'New York', 'http://gnjek.com', 'business', 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byUrl', '', ''),
+(5, 'Gaetan Price', '005@email.com', '$2y$10$3zAM.G033yfpn/0EUFYFJOE0upTTJdpco1Giv9gRyrDAeyocE8izG', 'Paris', 'http://gaetanprice.com', '', 0, '', 'byUrl', '966635792', '25519805@N00'),
+(6, 'Flynn Norman', '006@email.com', '$2y$10$VcG3a7lYlXNjoZJ5ZyK04ubbns/Gyk6gXELebSsFZJGKZB4.VEVI6', 'Stockholm', '', 'design', 12, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '863391', '44124330577@N01'),
+(7, 'Mark Swarm', '007@email.com', '$2y$10$z0DL6gTb2Qc1.7PnE2E.X.xDaAr3oFDmWCzuEpWwtsKJLFMWCFK5S', '', '', 'business', 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byUrl', '117197667', '39873962@N08'),
+(8, 'Peter Olman', '008@email.com', '$2y$10$tRTMUrbk.QMybjQyGM2i1eh0Ds9jHecpxE3LJXAFAh81n/BXONOym', 'Toronto', 'http://oman-olm.an', 'design', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '', '');
 
 -- --------------------------------------------------------
 
@@ -395,6 +418,7 @@ INSERT INTO `user_follows` (`user_id`, `following_user_id`) VALUES
 (6, 4),
 (8, 4),
 (6, 5),
+(1, 6),
 (7, 6),
 (8, 7),
 (8, 8);

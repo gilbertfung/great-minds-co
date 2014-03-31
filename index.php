@@ -1,7 +1,9 @@
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/dbconnect.php'; ?>
-<?php require_once 'includes/functions.php'; ?>
-<?php require_once 'includes/layouts/header.php'; ?>
+<?php require_once 'includes/functions/functions.php'; ?>
+<?php require_once 'includes/functions/user.php'; ?>
+<?php require_once 'includes/functions/entity.php'; ?>
+<?php require_once 'includes/functions/ajax.php'; ?><?php require_once 'includes/layouts/header.php'; ?>
 <?php
 	if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
 		$_SESSION['message'] = "Sign in to follow people and promote their ideas.";

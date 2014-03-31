@@ -1,6 +1,9 @@
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/dbconnect.php'; ?>
-<?php require_once 'includes/functions.php'; ?>
+<?php require_once 'includes/functions/functions.php'; ?>
+<?php require_once 'includes/functions/user.php'; ?>
+<?php require_once 'includes/functions/entity.php'; ?>
+<?php require_once 'includes/functions/ajax.php'; ?>
 <?php require_once 'includes/layouts/header.php'; ?>
 <?php requireSSL(false);
 // for industry filter

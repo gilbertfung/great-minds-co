@@ -1,7 +1,9 @@
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/dbconnect.php'; ?>
-<?php require_once 'includes/functions.php'; ?>
-<?php requireSSL(true);
+<?php require_once 'includes/functions/functions.php'; ?>
+<?php require_once 'includes/functions/user.php'; ?>
+<?php require_once 'includes/functions/entity.php'; ?>
+<?php require_once 'includes/functions/ajax.php'; ?><?php requireSSL(true);
 
 if (isset($_POST['login-submit'])) {
 	// process login (required fields already indicated in html form)

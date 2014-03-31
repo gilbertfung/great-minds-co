@@ -67,7 +67,7 @@
 				$(follow).click(function() {
 					var dataString = "process.php?follow="+'.$user['user_id'].';
 					$.ajax({
-						type: "POST",
+						type: "GET",
 						url: dataString,
 						success: function(html) {
 							//var $html = $(html);
@@ -80,7 +80,7 @@
 				$(unfollow).click(function() {
 					var dataString = "process.php?unfollow="+'.$user["user_id"].';
 					$.ajax({
-						type: "POST",
+						type: "GET",
 						url: dataString,
 						success: function(html) {
 							//var $html = $(html);
@@ -252,4 +252,23 @@
 		return $f->parsed_response['photos'];
 	}
 
+// AJAX calls for API
+	/*function fetch_latest_tweets($user) {
+		$username = get_username_by_twitter_id($user['twitter_userid']);
+        return "<script type='text/javascript'>
+			function fetch(handle) {
+            	$.ajax({
+                	type: 'GET',
+                   	url: 'process.php?tweetsby='+handle,
+                   	success: function(response){
+                    	$('#twitter').html(response);
+                    	console.log('tweet get!' + $.now());
+                    }
+           		});
+        	}
+			setInterval(fetch('".$username."'), 60000);
+		</script>";
+	}*/
+
+		
 ?>

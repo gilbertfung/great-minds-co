@@ -1,5 +1,6 @@
 <?php require_once 'includes/session.php'; ?>
 <?php require_once 'includes/dbconnect.php'; ?>
+<?php require_once 'includes/apiconfig.php'; ?>
 <?php require_once 'includes/functions/functions.php'; ?>
 <?php require_once 'includes/functions/user.php'; ?>
 <?php require_once 'includes/functions/entity.php'; ?>
@@ -38,5 +39,25 @@
 	} else if (isset($_GET['unpromote'])) {
 		$idea_id = $_GET['unpromote'];
 		promote(false, $user_id, $idea_id);
+	}
+
+	// RETREIVE TWEETS
+	if (isset($_GET['tweetsby'])) {
+		$username = $_GET['tweetsby'];
+		$tweets = get_latest_tweets(get_twitter_id_by_username($username));
+		foreach ($tweets as $tweet) {
+			if (!empty($tweet['text'])) {
+				echo '<li class="tile" style="background:#'.randcol().'">';
+					echo $tweet['text'];
+					echo '<p><a href="http://twitter.com/'.$tweet['user']['id_str'].'/status/'.$tweet['id_str'].'">';
+					echo 'View this Tweet</a></p>';
+				echo '</li>'; 
+			}
+		}
+	}
+
+	// RETRIEVE PHOTOS
+	if (isset($_GET['photos'])) {
+		// display the content
 	}
 ?>

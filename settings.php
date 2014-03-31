@@ -4,7 +4,8 @@
 <?php require_once 'includes/functions/functions.php'; ?>
 <?php require_once 'includes/functions/user.php'; ?>
 <?php require_once 'includes/functions/entity.php'; ?>
-<?php require_once 'includes/functions/ajax.php'; ?><?php requireSSL(true);
+<?php require_once 'includes/functions/ajax.php'; ?>
+<?php requireSSL(true);
 
 if (isset($_POST['submit'])) {
 	// passwords match process register

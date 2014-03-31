@@ -772,8 +772,9 @@ button a {
   font-family: 'Lato', sans-serif;
   font-size: 1.2rem;
   float: right;
+  text-decoration: underline;
 }
-/* line 79, sass/partials/_containers.scss */
+/* line 80, sass/partials/_containers.scss */
 #topic #cover #cover-info {
   padding: 2rem 3em;
 }

@@ -116,28 +116,35 @@
 <aside class="flex">
 	<?php if (!empty($user['twitter_userid'])) { ?>
 	<div class="bar">
-		<h3><?php echo $user['name']; ?>'s Tweets</h3>
-		<ul id="flickrphotos" class="flex">
+		<h3><?php echo $user['name']; ?>'s Tweets <span class="action"><a id="toggletwitter">Hide</a></span></h3>
+		<ul class="flex" id="twitter">
 		<?php 
-			$username = find_user_by_id($user['user_id']);
-			$tweets = get_latest_tweets($username['twitter_userid']);
-			foreach ($tweets as $tweet) {
-				if (!empty($tweet['text'])) {
-					echo '<li class="tile" style="background:#'.randcol().'">';
-						echo $tweet['text'];
-						echo '<p><a href="http://twitter.com/'.$tweet['user']['id_str'].'/status/'.$tweet['id_str'].'">';
-						echo 'View this Tweet</a></p>';
-					echo '</li>'; 
-				}
-			}
-		?>
+			// echo fetch_latest_tweets($username); // output feature in ajax
+			$userhandle = get_username_by_twitter_id($user['twitter_userid']);
+	    ?>
+	    <script type='text/javascript'>
+	    	var userhandle = <?php echo "\"".$userhandle."\""; ?>;
+			function fetch() {
+            	console.log(userhandle);
+            	$.ajax({
+                	type: 'GET',
+                   	url: 'process.php?tweetsby='+userhandle,
+                   	success: function(response){
+                    	$('#twitter').html(response);
+                    	console.log(userhandle + ' tweet get!' + $.now());
+                    }
+           		});
+        	}
+        	$(document).ready(fetch);
+			setInterval(fetch, 30000);
+		</script>
 		</ul>
 	</div>
 	<?php } ?>
 	<?php if (!empty($user['flickr_userid'])) { ?>
 	<div class="bar">
-		<h3><?php echo $user['name']; ?>'s Flickr Photostream</h3>
-		<ul class="flex">
+		<h3><?php echo $user['name']; ?>'s Flickr Photostream <span class="action"><a id="toggleflickr">Hide</a></span></h3>
+		<ul class="flex" id="flickr">
 		<?php 
 			$username = find_user_by_id($user['user_id']);
 			$photos = get_latest_photos($username['flickr_userid']);
@@ -152,6 +159,28 @@
 		</ul>
 	</div>
 	<?php } ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#toggletwitter").click(function() {
+				if ($('#twitter').css("display") == "none") {
+					$("#twitter").show();
+					$("#toggletwitter").text("Hide");
+				} else {
+					$("#twitter").hide();
+					$("#toggletwitter").text("Show");
+				}
+			});
+			$("#toggleflickr").click(function() {
+				if ($('#flickr').css("display") == "none") {
+					$("#flickr").show();
+					$("#toggleflickr").text("Hide");
+				} else {
+					$("#flickr").hide();
+					$("#toggleflickr").text("Show");
+				}
+			});
+		});
+	</script>
 </aside>
 
 </div>

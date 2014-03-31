@@ -50,12 +50,10 @@
 			-- Using APIs
 			-- AJAX and XML
 
+			You need to have a PHP script that AJAX will send the request to (this is normal). 
+			You MUST create the XML document as a response to the AJAX request by building it as a DOM object using DOM API. 
+			You serialize resulting DOM representation of XML as a response to the request. 
 
-			Excellent project. I noticed only few minor issues. 
-
-				The first one is related to the assignment requirements, where you did not provide an option for users to select whether they want to see tweets and/or flickr photos. That is, on a profile page, you should just enable user to hide/display tweets and photos. 
-
-				You should provide more details in the report (just extend A2 report). Although all functions are implemented correctly, file function.php handles too many responsibilities. Please consider splitting functions in separate files, according to functionalities they address. 
 		</p>
 	</div>
 </div>

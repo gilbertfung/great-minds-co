@@ -57,7 +57,15 @@
 	}
 
 	// RETRIEVE PHOTOS
-	if (isset($_GET['photos'])) {
-		// display the content
+	if (isset($_GET['photosby'])) {
+		$username = $_GET['photosby'];
+		$photos = get_latest_photos(get_flickr_id_by_username($username));
+		foreach ($photos['photo'] as $photo) {
+			echo '<a href="'.$f->buildPhotoURL($photo).'">';
+				echo '<li class="tile" style="background-image:url('.$f->buildPhotoURL($photo, 'medium').')">';
+					// echo '<img style="background:url('.$f->buildPhotoURL($photo, 'small').')">';
+				echo '</li>'; 
+			echo '</a>';
+		}
 	}
 ?>

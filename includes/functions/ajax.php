@@ -250,25 +250,5 @@
 
 		$f->people_getPublicPhotos($id, NULL, NULL, 6, 1);
 		return $f->parsed_response['photos'];
-	}
-
-// AJAX calls for API
-	/*function fetch_latest_tweets($user) {
-		$username = get_username_by_twitter_id($user['twitter_userid']);
-        return "<script type='text/javascript'>
-			function fetch(handle) {
-            	$.ajax({
-                	type: 'GET',
-                   	url: 'process.php?tweetsby='+handle,
-                   	success: function(response){
-                    	$('#twitter').html(response);
-                    	console.log('tweet get!' + $.now());
-                    }
-           		});
-        	}
-			setInterval(fetch('".$username."'), 60000);
-		</script>";
-	}*/
-
-		
+	}		
 ?>

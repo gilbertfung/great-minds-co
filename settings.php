@@ -41,8 +41,8 @@ $user = find_user_by_id($_SESSION['user_id']);
 				<option name="contact_pref" value="byUrl">Through my website</option>
 			</select><br> -->
 			<!--<?php echo '<input type="checkbox" name="ideamaker" value="ideamaker" checked="'.$_SESSION['ideamaker'].'">I am an Ideamaker.'; ?> --><!--TODO advanced user "upgrading"-->
-			<input type="text" name="twitter_username" placeholder="Twitter Username" value="<?php echo get_username_by_twitter_id($user['twitter_userid']); ?>"><br>
-			<input type="text" name="flickr_username" placeholder="Flickr Username" value="<?php echo get_username_by_flickr_id($user['flickr_userid']); ?>">
+			<input type="text" name="twitter_username" placeholder="Twitter Username" value="<?php if (isset($user['twitter_userid'])) {echo get_username_by_twitter_id($user['twitter_userid']);} ?>"><br>
+			<input type="text" name="flickr_username" placeholder="Flickr Username" value="<?php if (isset($user['flickr_userid'])) {echo get_username_by_flickr_id($user['flickr_userid']);} ?>">
 			<input class="button" type="submit" name="submit" value="Update">
 		</fieldset>
 	</form>

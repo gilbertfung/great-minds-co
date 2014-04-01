@@ -119,24 +119,24 @@
 		<h3><?php echo $user['name']; ?>'s Tweets <span class="action"><a id="toggletwitter">Hide</a></span></h3>
 		<ul class="flex" id="twitter">
 		<?php 
-			// echo fetch_latest_tweets($username); // output feature in ajax
-			$userhandle = get_username_by_twitter_id($user['twitter_userid']);
-	    ?>
-	    <script type='text/javascript'>
-	    	var userhandle = <?php echo "\"".$userhandle."\""; ?>;
-			function fetch() {
-            	console.log(userhandle);
-            	$.ajax({
-                	type: 'GET',
-                   	url: 'process.php?tweetsby='+userhandle,
-                   	success: function(response){
-                    	$('#twitter').html(response);
-                    	console.log(userhandle + ' tweet get!' + $.now());
-                    }
-           		});
-        	}
-        	$(document).ready(fetch);
-			setInterval(fetch, 30000);
+			$twitterhandle = get_username_by_twitter_id($user['twitter_userid']);
+			// echo $twitterhandle;
+		?>
+		<script type='text/javascript'>
+			var userhandle = <?php echo "\"".$twitterhandle."\""; ?>;
+			function fetch_twitter() {
+				// console.log(userhandle);
+				$.ajax({
+					type: 'GET',
+					url: 'process.php?tweetsby='+userhandle,
+					success: function(response) {
+						$('#twitter').html(response);
+						// console.log(userhandle + ' tweet get!' + $.now());
+					}
+				});
+			}
+			$(document).ready(fetch_twitter);
+			setInterval(fetch_twitter, 30000);
 		</script>
 		</ul>
 	</div>
@@ -146,16 +146,25 @@
 		<h3><?php echo $user['name']; ?>'s Flickr Photostream <span class="action"><a id="toggleflickr">Hide</a></span></h3>
 		<ul class="flex" id="flickr">
 		<?php 
-			$username = find_user_by_id($user['user_id']);
-			$photos = get_latest_photos($username['flickr_userid']);
-			foreach ($photos['photo'] as $photo) {
-				echo '<a href="'.$f->buildPhotoURL($photo).'">';
-					echo '<li class="tile" style="background-image:url('.$f->buildPhotoURL($photo, 'medium').')">';
-						// echo '<img style="background:url('.$f->buildPhotoURL($photo, 'small').')">';
-					echo '</li>'; 
-				echo '</a>';
-			}
+			// echo fetch_latest_tweets($username); // output feature in ajax
+			$flickrhandle = get_username_by_flickr_id($user['flickr_userid']);
 		?>
+		<script type='text/javascript'>
+			var userhandle = <?php echo "\"".$flickrhandle."\""; ?>;
+			function fetch_flickr() {
+				// console.log(userhandle);
+				$.ajax({
+					type: 'GET',
+					url: 'process.php?photosby='+userhandle,
+					success: function(response){
+						$('#flickr').html(response);
+						// console.log(userhandle + ' flickrphotos get!' + $.now());
+					}
+				});
+			}
+			$(document).ready(fetch_flickr);
+			// setInterval(fetch_flickr, 30000);
+		</script>
 		</ul>
 	</div>
 	<?php } ?>

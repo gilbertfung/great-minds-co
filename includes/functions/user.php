@@ -76,8 +76,12 @@
 		$ind_years = $post_array['ind_years'];
 		$bio = $post_array['bio'];
 
-		$twitter_userid = get_twitter_id_by_username($post_array['twitter_username']);
-		$flickr_userid = get_flickr_id_by_username($post_array['flickr_username']);
+		if (!empty($post_array['twitter_username'])) {
+			$twitter_userid = get_twitter_id_by_username($post_array['twitter_username']);
+		}
+		if (!empty($post_array['flickr_username'])) {
+			$flickr_userid = get_flickr_id_by_username($post_array['flickr_username']);
+		}
 
 		$stmt = mysqli_prepare($db, "UPDATE user SET location=?, website=?, industry=?, ind_years=?, bio=?, twitter_userid=?, flickr_userid=? WHERE email = ?");
 		// if (!$stmt) die('mysqli error: '.mysqli_error($db));

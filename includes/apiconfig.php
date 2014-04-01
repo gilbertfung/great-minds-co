@@ -27,4 +27,5 @@
 	$api_key = "a61f38056c82f968445bb729258172da";
 
 	$f = new phpFlickr($api_key);
+	$f->enableCache("db", "mysql://gilbertf:gilbertf@localhost/gilbertf");
 ?>

@@ -4,7 +4,8 @@
 <?php require_once 'includes/functions/functions.php'; ?>
 <?php require_once 'includes/functions/user.php'; ?>
 <?php require_once 'includes/functions/entity.php'; ?>
-<?php require_once 'includes/functions/ajax.php'; ?><?php require_once 'includes/layouts/header.php'; ?>
+<?php require_once 'includes/functions/ajax.php'; ?>
+<?php require_once 'includes/layouts/header.php'; ?>
 <?php requireSSL(false); 
 	if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
 		$_SESSION['message'] = "Sign in to view your information.";
@@ -129,9 +130,31 @@
 				$.ajax({
 					type: 'GET',
 					url: 'process.php?tweetsby='+userhandle,
-					success: function(response) {
-						$('#twitter').html(response);
-						// console.log(userhandle + ' tweet get!' + $.now());
+					// dataType: "xml",
+					// error: function(response) {
+					// 	console.log(response);
+					// 	$("#twitter").html(response['responseText']);
+					// },
+					success: function(xml) {
+						xml = xml.replace(/(\r\n|\n|\r)/gm,"");
+						xmlDoc = $.parseXML(xml);
+						console.log(xml);
+
+						var tweets = xmlDoc.getElementsByTagName('tweet');
+						var output = "";
+						for (var i = 0; i < tweets.length - 1; i++) {
+							console.log(tweets[i].childNodes[1].firstChild.data);
+							output += '<li class="tile" style="background:#<?php echo randcol(); ?>">' + 
+								'<p>' + tweets[i].childNodes[1].firstChild.data + '</p>' +
+								'<p>' + 
+									'<a href="http://twitter.com/' + tweets[i].childNodes[2].childNodes[0].firstChild.data + '/status/' + tweets[i].childNodes[0].firstChild.data + '">' +
+									'View ' + tweets[i].childNodes[2].childNodes[1].firstChild.data + '\'s Tweet</a>' +
+								'</p>'
+							'</li>';
+						}
+						
+						$('#twitter').html(output);
+						console.log(userhandle + ' tweet get!' + $.now());
 					}
 				});
 			}
@@ -194,9 +217,7 @@
 
 </div>
 </section>
-<?php require 'includes/layouts/footer.php'; ?>
-
-<?php
+<?php require 'includes/layouts/footer.php'; ?><!--<?php
 /*
 		require_once 'functions.php';
 
@@ -256,4 +277,4 @@
 		</div>
 	</section>
 */
-?>
+?>-->

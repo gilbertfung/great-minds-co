@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2014 at 05:10 AM
+-- Generation Time: Apr 01, 2014 at 09:02 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -21,6 +21,35 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `gilbertf` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `gilbertf`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `flickr_cache`
+--
+
+DROP TABLE IF EXISTS `flickr_cache`;
+CREATE TABLE IF NOT EXISTS `flickr_cache` (
+  `request` char(35) COLLATE utf8_unicode_ci NOT NULL,
+  `response` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `expiration` datetime NOT NULL,
+  KEY `request` (`request`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `flickr_cache`
+--
+
+INSERT INTO `flickr_cache` (`request`, `response`, `expiration`) VALUES
+('dc126251d33545a6bfe9b6009af851f7', 'a:2:{s:6:"person";a:12:{s:2:"id";s:12:"78817275@N04";s:4:"nsid";s:12:"78817275@N04";s:5:"ispro";i:0;s:10:"iconserver";s:4:"5238";s:8:"iconfarm";d:6;s:10:"path_alias";N;s:8:"username";a:1:{s:8:"_content";s:9:"simpol363";}s:11:"description";a:1:{s:8:"_content";s:36:"I wish flickr had better navigation.";}s:9:"photosurl";a:1:{s:8:"_content";s:42:"http://www.flickr.com/photos/78817275@N04/";}s:10:"profileurl";a:1:{s:8:"_content";s:42:"http://www.flickr.com/people/78817275@N04/";}s:9:"mobileurl";a:1:{s:8:"_content";s:47:"http://m.flickr.com/photostream.gne?id=78785136";}s:6:"photos";a:3:{s:14:"firstdatetaken";a:1:{s:8:"_content";s:19:"2012-05-20 19:56:51";}s:9:"firstdate";a:1:{s:8:"_content";s:10:"1338357097";}s:5:"count";a:1:{s:8:"_content";i:136;}}}s:4:"stat";s:2:"ok";}', '2014-04-01 20:05:33'),
+('d21fb4fdd88619729b746c98a57d2de6', 'a:2:{s:4:"user";a:3:{s:2:"id";s:12:"78817275@N04";s:4:"nsid";s:12:"78817275@N04";s:8:"username";a:1:{s:8:"_content";s:9:"simpol363";}}s:4:"stat";s:2:"ok";}', '2014-04-01 20:05:37'),
+('308ab5d35213ea0e71600e42d4901a14', 'a:2:{s:6:"photos";a:5:{s:4:"page";i:1;s:5:"pages";d:23;s:7:"perpage";i:6;s:5:"total";s:3:"136";s:5:"photo";a:6:{i:0;a:9:{s:2:"id";s:10:"7706695228";s:5:"owner";s:12:"78817275@N04";s:6:"secret";s:10:"4da3da6ab2";s:6:"server";s:4:"7270";s:4:"farm";d:8;s:5:"title";s:14:"Line (Updated)";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:1;a:9:{s:2:"id";s:10:"7706627240";s:5:"owner";s:12:"78817275@N04";s:6:"secret";s:10:"5b687cf3d4";s:6:"server";s:4:"7107";s:4:"farm";d:8;s:5:"title";s:25:"09. Wild Card 3 (updated)";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:2;a:9:{s:2:"id";s:10:"7658151668";s:5:"owner";s:12:"78817275@N04";s:6:"secret";s:10:"9b4ac4ec08";s:6:"server";s:4:"7258";s:4:"farm";d:8;s:5:"title";s:26:"01. Collage-Photomontage-4";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:3;a:9:{s:2:"id";s:10:"7657681600";s:5:"owner";s:12:"78817275@N04";s:6:"secret";s:10:"f3c5c5da7d";s:6:"server";s:4:"7120";s:4:"farm";d:8;s:5:"title";s:24:"01. Collage-Photomontage";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:4;a:9:{s:2:"id";s:10:"7657681466";s:5:"owner";s:12:"78817275@N04";s:6:"secret";s:10:"4e30940c22";s:6:"server";s:4:"8144";s:4:"farm";d:9;s:5:"title";s:17:"02. Compositing 2";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:5;a:9:{s:2:"id";s:10:"7657681306";s:5:"owner";s:12:"78817275@N04";s:6:"secret";s:10:"f3dc4db5ed";s:6:"server";s:4:"7262";s:4:"farm";d:8;s:5:"title";s:14:"03. Storyworld";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}}}s:4:"stat";s:2:"ok";}', '2014-04-01 20:05:39'),
+('364811d23f98c9223d0538b56cd97460', 'a:2:{s:6:"person";a:12:{s:2:"id";s:12:"25519805@N00";s:4:"nsid";s:12:"25519805@N00";s:5:"ispro";i:0;s:10:"iconserver";s:1:"1";s:8:"iconfarm";d:1;s:10:"path_alias";s:9:"yasuo1024";s:8:"username";a:1:{s:8:"_content";s:4:"1024";}s:11:"description";a:1:{s:8:"_content";s:0:"";}s:9:"photosurl";a:1:{s:8:"_content";s:39:"http://www.flickr.com/photos/yasuo1024/";}s:10:"profileurl";a:1:{s:8:"_content";s:39:"http://www.flickr.com/people/yasuo1024/";}s:9:"mobileurl";a:1:{s:8:"_content";s:45:"http://m.flickr.com/photostream.gne?id=197189";}s:6:"photos";a:3:{s:14:"firstdatetaken";a:1:{s:8:"_content";s:19:"2005-05-07 12:08:05";}s:9:"firstdate";a:1:{s:8:"_content";s:10:"1115519112";}s:5:"count";a:1:{s:8:"_content";i:149;}}}s:4:"stat";s:2:"ok";}', '2014-04-01 06:44:19'),
+('02bc53b6a38b2c4629ff4b6ed5fab417', 'a:2:{s:4:"user";a:3:{s:2:"id";s:12:"25519805@N00";s:4:"nsid";s:12:"25519805@N00";s:8:"username";a:1:{s:8:"_content";s:4:"1024";}}s:4:"stat";s:2:"ok";}', '2014-04-01 06:44:23'),
+('8dd98f7a95ed433e6130eb0ca37d4906', 'a:2:{s:6:"photos";a:5:{s:4:"page";i:1;s:5:"pages";d:25;s:7:"perpage";i:6;s:5:"total";s:3:"149";s:5:"photo";a:6:{i:0;a:9:{s:2:"id";s:10:"2991021966";s:5:"owner";s:12:"25519805@N00";s:6:"secret";s:10:"1ffde2d7a1";s:6:"server";s:4:"3009";s:4:"farm";d:4;s:5:"title";s:8:"R0011807";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:1;a:9:{s:2:"id";s:10:"2990167367";s:5:"owner";s:12:"25519805@N00";s:6:"secret";s:10:"6e0d83b443";s:6:"server";s:4:"3034";s:4:"farm";d:4;s:5:"title";s:8:"R0011690";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:2;a:9:{s:2:"id";s:10:"2990167187";s:5:"owner";s:12:"25519805@N00";s:6:"secret";s:10:"f5cdc30b4e";s:6:"server";s:4:"3149";s:4:"farm";d:4;s:5:"title";s:8:"R0011667";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:3;a:9:{s:2:"id";s:10:"2990166943";s:5:"owner";s:12:"25519805@N00";s:6:"secret";s:10:"e54a055fba";s:6:"server";s:4:"3191";s:4:"farm";d:4;s:5:"title";s:8:"R0011663";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:4;a:9:{s:2:"id";s:10:"2990166857";s:5:"owner";s:12:"25519805@N00";s:6:"secret";s:10:"5f7203491e";s:6:"server";s:4:"3216";s:4:"farm";d:4;s:5:"title";s:7:"Unknown";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}i:5;a:9:{s:2:"id";s:10:"2991021126";s:5:"owner";s:12:"25519805@N00";s:6:"secret";s:10:"7d9aee0937";s:6:"server";s:4:"3160";s:4:"farm";d:4;s:5:"title";s:12:"ã€Œæ²³ç¥žã€";s:8:"ispublic";i:1;s:8:"isfriend";i:0;s:8:"isfamily";i:0;}}}s:4:"stat";s:2:"ok";}', '2014-04-01 06:44:25'),
+('1cc6488d428e697d113889c3e5ec02cc', 'a:2:{s:6:"person";a:14:{s:2:"id";s:15:"44124330577@N01";s:4:"nsid";s:15:"44124330577@N01";s:5:"ispro";i:0;s:10:"iconserver";s:1:"0";s:8:"iconfarm";d:0;s:10:"path_alias";N;s:8:"username";a:1:{s:8:"_content";s:4:"SOLO";}s:8:"realname";a:1:{s:8:"_content";s:0:"";}s:8:"location";a:1:{s:8:"_content";s:0:"";}s:11:"description";a:1:{s:8:"_content";s:0:"";}s:9:"photosurl";a:1:{s:8:"_content";s:45:"http://www.flickr.com/photos/44124330577@N01/";}s:10:"profileurl";a:1:{s:8:"_content";s:45:"http://www.flickr.com/people/44124330577@N01/";}s:9:"mobileurl";a:1:{s:8:"_content";s:44:"http://m.flickr.com/photostream.gne?id=22043";}s:6:"photos";a:3:{s:14:"firstdatetaken";a:1:{s:8:"_content";N;}s:9:"firstdate";a:1:{s:8:"_content";N;}s:5:"count";a:1:{s:8:"_content";i:0;}}}s:4:"stat";s:2:"ok";}', '2014-04-01 06:44:28'),
+('09af058ab572123c891e10f11f0cc5f3', 'a:2:{s:4:"user";a:3:{s:2:"id";s:15:"44124330577@N01";s:4:"nsid";s:15:"44124330577@N01";s:8:"username";a:1:{s:8:"_content";s:4:"SOLO";}}s:4:"stat";s:2:"ok";}', '2014-04-01 06:44:33'),
+('3ab0119019f92f1328e3b9e473fa4473', 'a:2:{s:6:"photos";a:5:{s:4:"page";i:1;s:5:"pages";d:0;s:7:"perpage";i:6;s:5:"total";s:1:"0";s:5:"photo";a:0:{}}s:4:"stat";s:2:"ok";}', '2014-04-01 06:44:35');
 
 -- --------------------------------------------------------
 
@@ -141,7 +170,8 @@ CREATE TABLE IF NOT EXISTS `ideamaker_update` (
 --
 
 INSERT INTO `ideamaker_update` (`user_id`, `update_id`) VALUES
-(1, 1);
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -199,7 +229,8 @@ CREATE TABLE IF NOT EXISTS `project_update` (
 --
 
 INSERT INTO `project_update` (`idea_id`, `update_id`) VALUES
-(1, 1);
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -221,7 +252,8 @@ INSERT INTO `promoter` (`user_id`) VALUES
 (2),
 (5),
 (6),
-(8);
+(8),
+(9);
 
 -- --------------------------------------------------------
 
@@ -327,14 +359,15 @@ CREATE TABLE IF NOT EXISTS `update` (
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `content` mediumblob NOT NULL,
   PRIMARY KEY (`update_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `update`
 --
 
 INSERT INTO `update` (`update_id`, `update_name`, `date_created`, `content`) VALUES
-(1, 'This is an update', '2014-03-10 00:10:36', 0x49206c696b6520746f206d616b6520757064617465732e);
+(1, 'This is an update', '2014-03-10 00:10:36', 0x49206c696b6520746f206d616b6520757064617465732e),
+(2, 'Another update', '2014-03-10 04:30:30', 0x5468697320697320616e6f7468657220757064617465);
 
 -- --------------------------------------------------------
 
@@ -358,7 +391,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `flickr_userid` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `userid` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `user`
@@ -367,12 +400,14 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `location`, `website`, `industry`, `ind_years`, `bio`, `contact_pref`, `twitter_userid`, `flickr_userid`) VALUES
 (1, 'John Smith 001', '001@email.com', '$2y$10$nkGwGC0egNplnv8J6iZ.VeZdtQV3wSfmcDekoodwF28Djb/70rS0y', 'Vancouver', 'http://localhost', 'design', 5, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '59034638', '78817275@N04'),
 (2, 'Jane Smith', '002@email.com', '$2y$10$062ZmBuGP1COrlUOok/CEuskwFudjQaQIi1L1aLayhoQyxwNsJ6qa', 'Seattle', 'http://8.8.8.8', 'software', 6, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '', '12345678@N04'),
-(3, 'Alex Jones', '003@email.com', '$2y$10$JQT92ssDtLcxhUPtz3caBeC2Q9PdafNhvKe0pZurkoK817G/l7A/W', 'Vancouver', '', 'business', 23, '', 'byEmail', '', ''),
+(3, 'Alex Jones', '003@email.com', '$2y$10$JQT92ssDtLcxhUPtz3caBeC2Q9PdafNhvKe0pZurkoK817G/l7A/W', 'Vancouver', '', 'business', 23, '', 'byEmail', '66854846', ''),
 (4, 'Alice Gnjek', '004@email.com', '$2y$10$OSNpL5/LVWusU9BcnmB70.mS2gFhz./yePwCMTIE/NLPI95j7KBum', 'New York', 'http://gnjek.com', 'business', 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byUrl', '', ''),
 (5, 'Gaetan Price', '005@email.com', '$2y$10$3zAM.G033yfpn/0EUFYFJOE0upTTJdpco1Giv9gRyrDAeyocE8izG', 'Paris', 'http://gaetanprice.com', '', 0, '', 'byUrl', '966635792', '25519805@N00'),
 (6, 'Flynn Norman', '006@email.com', '$2y$10$VcG3a7lYlXNjoZJ5ZyK04ubbns/Gyk6gXELebSsFZJGKZB4.VEVI6', 'Stockholm', '', 'design', 12, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '863391', '44124330577@N01'),
-(7, 'Mark Swarm', '007@email.com', '$2y$10$z0DL6gTb2Qc1.7PnE2E.X.xDaAr3oFDmWCzuEpWwtsKJLFMWCFK5S', '', '', 'business', 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byUrl', '117197667', '39873962@N08'),
-(8, 'Peter Olman', '008@email.com', '$2y$10$tRTMUrbk.QMybjQyGM2i1eh0Ds9jHecpxE3LJXAFAh81n/BXONOym', 'Toronto', 'http://oman-olm.an', 'design', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '', '');
+(7, 'Mark Swarm', '007@email.com', '$2y$10$z0DL6gTb2Qc1.7PnE2E.X.xDaAr3oFDmWCzuEpWwtsKJLFMWCFK5S', '', '', 'business', 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byUrl', '117197667', ''),
+(8, 'Peter Olman', '008@email.com', '$2y$10$tRTMUrbk.QMybjQyGM2i1eh0Ds9jHecpxE3LJXAFAh81n/BXONOym', 'Toronto', 'http://oman-olm.an', 'design', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a commodo sem, quis pharetra neque. Aliquam erat volutpat. Maecenas ut dictum enim. Aliquam erat volutpat. Cras fermentum turpis mi, sed sollicitudin mi vulputate in. Vestibulum vehicula metus a augue fringilla hendrerit. Aliquam posuere elementum lectus. Etiam adipiscing tincidunt mollis. Quisque bibendum molestie gravida. Vestibulum facilisis porta dignissim.', 'byEmail', '66854846', ''),
+(9, 'Demo User', '100@email.com', '$2y$10$vlS2RS901RAmd4uLGuD/eO21.bMHxkTpHsVzE6rxUN3SEty/6crCO', 'Calgary', '', '', 0, '', 'byEmail', '', ''),
+(10, 'Demo User', '100@email.com', '$2y$10$vlS2RS901RAmd4uLGuD/eO21.bMHxkTpHsVzE6rxUN3SEty/6crCO', 'Calgary', '', '', 0, '', 'byEmail', '', '');
 
 -- --------------------------------------------------------
 

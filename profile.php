@@ -138,7 +138,7 @@
 					success: function(xml) {
 						xml = xml.replace(/(\r\n|\n|\r)/gm,"");
 						xmlDoc = $.parseXML(xml);
-						console.log(xml);
+						// console.log(xml);
 
 						var tweets = xmlDoc.getElementsByTagName('tweet');
 						var output = "";
@@ -154,7 +154,7 @@
 						}
 						
 						$('#twitter').html(output);
-						console.log(userhandle + ' tweet get!' + $.now());
+						// console.log(userhandle + ' tweet get!' + $.now());
 					}
 				});
 			}
